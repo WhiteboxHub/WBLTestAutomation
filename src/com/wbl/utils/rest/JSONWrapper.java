@@ -1,0 +1,208 @@
+package com.wbl.utils.rest;
+
+import com.wbl.utils.web.PageDriver;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
+/**
+ * Created by Shilpi on 8/31/2015.
+ */
+public class JSONWrapper {
+
+    private Logger _logger;
+    private JSONArray jsonArray;
+    private JSONObject jsonObj;
+    //private JSONObject childJson;
+    //private List<JSONObject> childJsonList = new ArrayList<JSONObject>();
+
+
+    public JSONWrapper(JSONObject obj)
+    {
+         this.jsonObj = obj;
+        _logger = Logger.getLogger(PageDriver.class);
+    }
+
+    public boolean isArray()
+    {
+        return false;
+    }
+
+    public boolean isKeyAvailable(String mKey)
+    {
+        boolean available = false;
+        Iterator<String> jsonKeys = jsonObj.keys();
+        while (jsonKeys.hasNext()) {
+            String key = jsonKeys.next();
+            if (key.equals(mKey)) {
+                available = true;
+                break;
+            }
+
+        }
+        return available;
+
+    }
+
+    public boolean isValueNotNull(String mKey) {
+        try {
+            boolean isNull = jsonObj.get(mKey).toString() != null ? true : false;
+            return isNull;
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return true;
+    }
+
+    public String getJsonValue(String mKey)
+    {
+        String value = null;
+        try {
+            value = jsonObj.get(mKey).toString();
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return value;
+    }
+
+    public int getJsonIntValue(String mKey) {
+        int intValue = 0;
+        String value = null;
+        try {
+            value = jsonObj.get(mKey).toString();
+            if (!StringUtils.isNumeric(value)) {
+                _logger.info("Passed key doesn't contain a valid integer value");
+                return 0;
+            } else {
+                intValue = Integer.parseInt(value);
+            }
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return intValue;
+    }
+
+    public boolean getJsonBooleanVal(String mKey) {
+        boolean boolValue = true;
+        String value = null;
+        try {
+            value = jsonObj.get(mKey).toString();
+            boolValue = Boolean.valueOf(value);
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return boolValue;
+    }
+
+
+    public JSONObject getJsonObject(String mKey)
+    {
+        Object json;
+        JSONWrapper childObj = null;
+        try {
+            json = jsonObj.get(mKey);
+            if(json != null && (json instanceof JSONObject || json instanceof JSONArray))
+            {
+                this.jsonObj = (JSONObject)json;
+            }
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+
+        return this.jsonObj;
+    }
+
+    public boolean isPropertyArray(String mKey)
+    {
+        boolean isArray = false;
+        Object obj = null;
+        try {
+            obj = jsonObj.get(mKey);
+            if(obj != null && obj instanceof JSONArray)
+            {
+                isArray = true;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return isArray;
+    }
+
+    public String getJsonArrayElement(String mKey,int index)
+    {
+        String value = null;
+        Object obj = null;
+        JSONArray array;
+        try {
+            obj = jsonObj.get(mKey);
+            if(obj == null || !(obj instanceof JSONArray))
+            {
+                _logger.info("Passed value is not a valid json array");
+                return null;
+            }
+            else
+            {
+                array = (JSONArray)obj;
+                value = getElement(array,index);
+                value = array.get(index).toString();
+            }
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return value;
+    }
+
+    public String getElement(JSONArray array , int index)
+    {
+        try {
+            return array.get(index).toString();
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+
+        return "";
+    }
+
+    /*
+
+    public void setChildJson()
+    {
+        Iterator<String> keys = jsonObj.keys();
+        try {
+        while (keys.hasNext())
+        {
+
+                Object obj = jsonObj.get(keys.next());
+               if(obj != null && obj instanceof JSONObject)
+               {
+                   this.childJsonList.add((JSONObject) obj);
+               }
+        }
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+    }
+
+    public String getChildValue(String mKey)
+    {
+        try {
+            return childJson.get(mKey).toString();
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+        return "";
+    }*/
+
+    public int getPropertyCount()
+    {
+       return jsonObj.length();
+    }
+    public int getArrayCount() {
+        return jsonArray.length();
+    }
+}

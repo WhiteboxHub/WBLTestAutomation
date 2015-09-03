@@ -1,0 +1,10 @@
+1. Data driven framework
+2. Screenshot API
+3. File upload Util
+4. Test reporting
+5. Integration with Rally/Jira using web service
+6. REST Api Automation
+7. Jenkins Integration
+8. Clean definition of maven pom.xml
+9. Hierarchical testng xml files.
+10.

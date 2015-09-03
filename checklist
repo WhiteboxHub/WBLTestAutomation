@@ -1,0 +1,27 @@
+Page Object Pattern
+Dependency Injection
+Singleton
+Dynamic Locators
+Data Driven - todo
+Reusable and reduce dependency on outside code
+testng - dynamic suites
+maven dependencies
+jenkins - todo
+logging - log4j
+
+
+webdriver cases
+explicit waits - all pages
+select api - recordings page.
+window handles - presentations page.
+timeouts using config.
+javascript executor - alert or hide a section using javascript
+document.getElement.syle(display:none);
+iframe - youtube iframe - switchto
+desired capabilities
+Navigation api
+File Upload
+Drag and Drop
+Read sessionid using cookie
+mobile emulator - touchscreen api - pinch, double tap
+
