@@ -29,7 +29,7 @@ public class RESTUtil {
     public RESTUtil(Configuration configuration) {
         _configuration = configuration;
         _logger = Logger.getLogger(RESTUtil.class);
-       this.header = new Headers();
+        this.header = new Headers();
     }
 
     public JSONWrapper getJson() {
@@ -51,7 +51,7 @@ public class RESTUtil {
         request.addHeader("User-Agent", "USER_AGENT");
         response = HttpClientBuilder.create().build().execute(request);
         setHeader(response.getAllHeaders());
-       // headers = response.getAllHeaders();
+        // headers = response.getAllHeaders();
     }
 
     private void setHeader(Header[] mHeaders)
@@ -63,15 +63,16 @@ public class RESTUtil {
         get(resource, null, "application/json", null);
         String json = IOUtils.toString(response.getEntity().getContent());
         jsonArray = new JSONArray(json);
+        setJson(new JSONWrapper(jsonArray));
     }
 
     public void getJSONEntity(String resource) throws Exception {
         get(resource, null, "application/json", null);
-       // json.setJsonObject(IOUtils.toString(response.getEntity().getContent()));
+        // json.setJsonObject(IOUtils.toString(response.getEntity().getContent()));
         String json = IOUtils.toString(response.getEntity().getContent());
         JSONObject obj = new JSONObject(json);
-        this.json =  new JSONWrapper(obj);
-       // this.jsonObj = new JSONObject(jsonObj);
+        setJson(new JSONWrapper(obj));
+        // this.jsonObj = new JSONObject(jsonObj);
     }
 
 

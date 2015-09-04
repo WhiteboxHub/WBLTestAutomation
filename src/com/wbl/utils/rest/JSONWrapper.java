@@ -20,17 +20,20 @@ public class JSONWrapper {
     //private JSONObject childJson;
     //private List<JSONObject> childJsonList = new ArrayList<JSONObject>();
 
-
-    public JSONWrapper(JSONObject obj)
+    public JSONWrapper()
     {
-         this.jsonObj = obj;
         _logger = Logger.getLogger(PageDriver.class);
     }
 
-    public boolean isArray()
+    public JSONWrapper(JSONArray array)
     {
-        return false;
+        this.jsonArray = array;
     }
+    public JSONWrapper(JSONObject obj)
+    {
+        this.jsonObj = obj;
+    }
+
 
     public boolean isKeyAvailable(String mKey)
     {
@@ -149,7 +152,7 @@ public class JSONWrapper {
             {
                 array = (JSONArray)obj;
                 value = getElement(array,index);
-                value = array.get(index).toString();
+                value = (String)array.get(index);
             }
         } catch (JSONException e) {
             _logger.error(e);
@@ -160,7 +163,7 @@ public class JSONWrapper {
     public String getElement(JSONArray array , int index)
     {
         try {
-            return array.get(index).toString();
+            return (String)array.get(index);
         } catch (JSONException e) {
             _logger.error(e);
         }
@@ -200,7 +203,7 @@ public class JSONWrapper {
 
     public int getPropertyCount()
     {
-       return jsonObj.length();
+        return jsonObj.length();
     }
     public int getArrayCount() {
         return jsonArray.length();

@@ -54,11 +54,9 @@ public class GitHubTest extends BaseApiTest {
 
     public void testJsonObject()
     {
-        HashMap<String,String> jsonPropMap = _config.JsonMap;
-        for (String key : jsonPropMap.keySet())
-        {
-            //assertEquals(restUtil.json.getJsonValue(key),jsonPropMap.get(key));
-        }
+        assertTrue(restUtil.getJson().isKeyAvailable("id"));
+        assertEquals(restUtil.getJson().getJsonIntValue("id"), 4023110);
+        assertEquals(restUtil.getJson().getJsonValue("login"),"WhiteboxHub");
     }
 
 }
