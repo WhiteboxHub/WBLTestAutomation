@@ -30,10 +30,10 @@ public class StackExchangeTest extends BaseApiTest {
             restUtil.getJSONEntity(query);
             assertNotEquals(restUtil.isValidResponse(), null);
             assertEquals(restUtil.getStatusCode(), HttpStatus.SC_OK);
-            assertEquals(restUtil.header.getContentType(),_config.ContentType);
+            assertEquals(restUtil.header.getContentType(),"application/json; charset=utf-8");
             if(restUtil.header.getContentLength() != null)
             {
-                assertEquals(restUtil.header.getContentLength(),_config.ContentLength);
+                assertEquals(restUtil.header.getContentLength(),"500");
             }
             testJson();
         } catch (Exception e) {
