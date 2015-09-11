@@ -135,6 +135,15 @@ public class JSONWrapper {
         return null;
     }
 
+    public void getJsonArrayObject(int index)
+    {
+        try {
+            this.jsonObj = (JSONObject)jsonArray.get(index);
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+    }
+
     public boolean isPropertyArray(String mKey)
     {
         boolean isArray = false;

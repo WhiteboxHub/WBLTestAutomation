@@ -1,7 +1,8 @@
-<suite name="UIAutomation" verbose="1">
+<suite name="RestAutomation" verbose="1">
     <test name="Smoke">
         <classes>
             <class name="com.wbl.tests.api.GitHubTest"/>
+            <class name="com.wbl.tests.api.StackExchangeTest"/>
         </classes>
     </test>
 </suite>

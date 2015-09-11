@@ -23,7 +23,7 @@ public class RESTUtil {
     private HttpResponse response;
     public Headers header = null;//Header[] headers; //response.getAllHeaders();
     private JSONWrapper json = null;
-    private JSONArray jsonArray;
+//    private JSONArray jsonArray;
     //private JSONObject jsonObj;
 
     public RESTUtil(Configuration configuration) {
@@ -59,11 +59,11 @@ public class RESTUtil {
         header.headers = mHeaders;
     }
 
-    public void getJSONArray(String resource) throws Exception {
-        get(resource, null, "application/json", null);
-        String json = IOUtils.toString(response.getEntity().getContent());
-        jsonArray = new JSONArray(json);
-        setJson(new JSONWrapper(jsonArray));
+    public void getJSONArray(String resource) throws Exception{
+            get(resource, null, "application/json", null);
+            String json = IOUtils.toString(response.getEntity().getContent());
+            JSONArray jsonArray = new JSONArray(json);
+            setJson(new JSONWrapper(jsonArray));
     }
 
     public void getJSONEntity(String resource) throws Exception {
@@ -87,4 +87,15 @@ public class RESTUtil {
     public String getLocale() { return response.getLocale().toString();}
 
 
+    public String getResource(String url)
+    {
+        String resource = null;
+        String[] resourceArray = url.split(_configuration.BaseURI);
+        if(resourceArray != null && resourceArray[1] != null)
+        {
+          resource = resourceArray[1];
+        }
+
+        return resource;
+    }
 }
