@@ -31,7 +31,7 @@ public class JSONWrapper {
     }
     public JSONWrapper(JSONObject obj)
     {
-        this.jsonObj = obj;
+         this.jsonObj = obj;
     }
 
 
@@ -105,18 +105,43 @@ public class JSONWrapper {
     public JSONObject getJsonObject(String mKey)
     {
         Object json;
-        JSONWrapper childObj = null;
+        JSONArray array = null;
         try {
             json = jsonObj.get(mKey);
-            if(json != null && (json instanceof JSONObject || json instanceof JSONArray))
+            if(json != null && (json instanceof JSONObject))
             {
-                this.jsonObj = (JSONObject)json;
+                return (JSONObject)json;
             }
         } catch (JSONException e) {
             _logger.error(e);
         }
 
-        return this.jsonObj;
+        return null;
+    }
+
+    public JSONArray getJsonArray(String mKey)
+    {
+        Object json;
+        try {
+            json = jsonObj.get(mKey);
+            if(json != null && (json instanceof JSONArray))
+            {
+               return (JSONArray)json;
+            }
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
+
+        return null;
+    }
+
+    public void getJsonArrayObject(int index)
+    {
+        try {
+            this.jsonObj = (JSONObject)jsonArray.get(index);
+        } catch (JSONException e) {
+            _logger.error(e);
+        }
     }
 
     public boolean isPropertyArray(String mKey)
@@ -128,6 +153,7 @@ public class JSONWrapper {
             if(obj != null && obj instanceof JSONArray)
             {
                 isArray = true;
+                this.jsonArray = (JSONArray)obj;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -152,7 +178,7 @@ public class JSONWrapper {
             {
                 array = (JSONArray)obj;
                 value = getElement(array,index);
-                value = (String)array.get(index);
+               // value = (String)array.get(index);
             }
         } catch (JSONException e) {
             _logger.error(e);
@@ -160,6 +186,23 @@ public class JSONWrapper {
         return value;
     }
 
+    public void getArrayChildObject(int index)
+    {
+        Object obj = null;
+        try {
+            if (jsonArray != null && jsonArray.length() > 0) {
+                obj = jsonArray.get(index);
+                if (obj instanceof JSONObject)
+                {
+                    this.jsonObj = (JSONObject)obj;
+                }
+            }
+        }
+        catch (JSONException e)
+        {
+            _logger.error(e);
+        }
+    }
     public String getElement(JSONArray array , int index)
     {
         try {
@@ -203,7 +246,7 @@ public class JSONWrapper {
 
     public int getPropertyCount()
     {
-        return jsonObj.length();
+       return jsonObj.length();
     }
     public int getArrayCount() {
         return jsonArray.length();

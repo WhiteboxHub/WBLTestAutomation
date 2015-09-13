@@ -6,8 +6,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-
 import static org.testng.Assert.*;
 
 /**
@@ -15,6 +13,7 @@ import static org.testng.Assert.*;
  */
 public class GitHubTest extends BaseApiTest {
 
+    public String repoURL;
 
     @BeforeClass
     public void beforeClass() {
@@ -25,38 +24,45 @@ public class GitHubTest extends BaseApiTest {
     public Object[][] getUsers() {
         return new Object[][]{{"users/whiteboxhub"}};
     }
-/*
-    @DataProvider(name = "users-data")
-    public Object[][] getJsonData() {
-        return new Object[][]{{"users/whiteboxhub"}};
-    }*/
 
     @Test(priority = 1, alwaysRun = true, dataProvider = "users-data")
-    public void testUser(String username) {
-        try {
+    public void testUser(String username) throws Exception{
             restUtil.getJSONEntity(username);
-            assertNotEquals(restUtil.isValidResponse(),null);
+            assertNotEquals(restUtil.isValidResponse(), null);
             assertEquals(restUtil.getStatusCode(), HttpStatus.SC_OK);
-            assertEquals(restUtil.header.getContentType(),_config.ContentType);
+            assertEquals(restUtil.header.getContentType(), "application/json; charset=utf-8");
             if(restUtil.header.getContentLength() != null)
             {
-                assertEquals(restUtil.header.getContentLength(),_config.ContentLength);
+                assertEquals(restUtil.header.getContentLength(),"500");
             }
-            assertEquals(restUtil.getLocale(),_config.Locale);
-            assertEquals(restUtil.header.getServer(),_config.Server);
-            testJsonObject();
+            assertEquals(restUtil.getJson().getPropertyCount(),30);
+            assertEquals(restUtil.getLocale(),"en_US");
+            assertEquals(restUtil.header.getServer(), "GitHub.com");
+            assertTrue(restUtil.getJson().isKeyAvailable("id"));
+            assertEquals(restUtil.getJson().getJsonIntValue("id"), 4023110);
+            assertEquals(restUtil.getJson().getJsonValue("login"), "WhiteboxHub");
 
+        //get repository url
 
-        } catch (Exception e) {
-            assertFalse(true);
-        }
+            this.repoURL = restUtil.getResource(restUtil.getJson().getJsonValue("repos_url"));
     }
 
-    public void testJsonObject()
+    @Test(dependsOnMethods = {"testUser"})
+    public void testRepos()throws Exception
     {
-        assertTrue(restUtil.getJson().isKeyAvailable("id"));
-        assertEquals(restUtil.getJson().getJsonIntValue("id"), 4023110);
-        assertEquals(restUtil.getJson().getJsonValue("login"),"WhiteboxHub");
+        restUtil.getJSONArray(repoURL);
+        assertEquals(restUtil.getStatusCode(), HttpStatus.SC_OK);
+        assertEquals(restUtil.header.getContentType(), "application/json; charset=utf-8");
+        if(restUtil.header.getContentLength() != null)
+        {
+            assertEquals(restUtil.header.getContentLength(),"500");
+        }
+        assertEquals(restUtil.getJson().getArrayCount(),9);
+        restUtil.getJson().getJsonArrayObject(3);
+        assertEquals(restUtil.getJson().getPropertyCount(), 67);
+        assertEquals(restUtil.getJson().getJsonValue("url"),"https://api.github.com/repos/WhiteboxHub/Programming-Practice");
+        assertEquals(restUtil.getJson().getJsonIntValue("id"),40985176);
+
     }
 
 }
