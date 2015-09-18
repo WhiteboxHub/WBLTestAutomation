@@ -17,12 +17,13 @@ import org.json.JSONObject;
  */
 public class RESTUtil {
 
-    private final Configuration _configuration;
+    public final Configuration _configuration;
     private Logger _logger;
     private HttpUriRequest request;
     private HttpResponse response;
     public Headers header = null;//Header[] headers; //response.getAllHeaders();
     private JSONWrapper json = null;
+    private String uri;
 //    private JSONArray jsonArray;
     //private JSONObject jsonObj;
 
@@ -41,7 +42,8 @@ public class RESTUtil {
     }
 
     private void get(String resource, String contentType, String accept, String authorization) throws Exception {
-        request = new HttpGet(_configuration.BaseURI + resource);
+       //  request = new HttpGet(_configuration.BaseURI + resource);
+        request = new HttpGet(getUri() + resource);
         if (contentType != null)
             request.setHeader("Content-Type", contentType);
         if (accept != null)
@@ -97,5 +99,14 @@ public class RESTUtil {
         }
 
         return resource;
+    }
+
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

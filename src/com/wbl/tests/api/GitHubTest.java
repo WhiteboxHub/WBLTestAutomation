@@ -2,9 +2,7 @@ package com.wbl.tests.api;
 
 import com.wbl.base.BaseApiTest;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 
@@ -15,9 +13,11 @@ public class GitHubTest extends BaseApiTest {
 
     public String repoURL;
 
-    @BeforeClass
-    public void beforeClass() {
+    @BeforeTest
+    @Parameters({"uri"})
+    public void setBaseUri(String uri) {
         //data setup
+        restUtil.setUri(uri);
     }
 
     @DataProvider(name = "users-data")
@@ -27,24 +27,24 @@ public class GitHubTest extends BaseApiTest {
 
     @Test(priority = 1, alwaysRun = true, dataProvider = "users-data")
     public void testUser(String username) throws Exception{
-            restUtil.getJSONEntity(username);
-            assertNotEquals(restUtil.isValidResponse(), null);
-            assertEquals(restUtil.getStatusCode(), HttpStatus.SC_OK);
-            assertEquals(restUtil.header.getContentType(), "application/json; charset=utf-8");
-            if(restUtil.header.getContentLength() != null)
-            {
-                assertEquals(restUtil.header.getContentLength(),"500");
-            }
-            assertEquals(restUtil.getJson().getPropertyCount(),30);
-            assertEquals(restUtil.getLocale(),"en_US");
-            assertEquals(restUtil.header.getServer(), "GitHub.com");
-            assertTrue(restUtil.getJson().isKeyAvailable("id"));
-            assertEquals(restUtil.getJson().getJsonIntValue("id"), 4023110);
-            assertEquals(restUtil.getJson().getJsonValue("login"), "WhiteboxHub");
+        restUtil.getJSONEntity(username);
+        assertNotEquals(restUtil.isValidResponse(), null);
+        assertEquals(restUtil.getStatusCode(), HttpStatus.SC_OK);
+        assertEquals(restUtil.header.getContentType(), "application/json; charset=utf-8");
+        if(restUtil.header.getContentLength() != null)
+        {
+            assertEquals(restUtil.header.getContentLength(),"500");
+        }
+        assertEquals(restUtil.getJson().getPropertyCount(),30);
+        assertEquals(restUtil.getLocale(),"en_US");
+        assertEquals(restUtil.header.getServer(), "GitHub.com");
+        assertTrue(restUtil.getJson().isKeyAvailable("id"));
+        assertEquals(restUtil.getJson().getJsonIntValue("id"), 4023110);
+        assertEquals(restUtil.getJson().getJsonValue("login"), "WhiteboxHub");
 
         //get repository url
 
-            this.repoURL = restUtil.getResource(restUtil.getJson().getJsonValue("repos_url"));
+        this.repoURL = restUtil.getResource(restUtil.getJson().getJsonValue("repos_url"));
     }
 
     @Test(dependsOnMethods = {"testUser"})
@@ -65,4 +65,9 @@ public class GitHubTest extends BaseApiTest {
 
     }
 
+    @AfterTest
+    public void clear()
+    {
+        restUtil.setUri(null);
+    }
 }

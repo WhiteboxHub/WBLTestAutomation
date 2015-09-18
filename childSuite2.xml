@@ -1,0 +1,10 @@
+<suite name="ChildSuite2" verbose="1">
+
+    <test name="StackOverFlowTest">
+        <parameter name="uri" value="http://api.stackexchange.com/"></parameter>
+        <classes>
+            <class name="com.wbl.tests.api.StackExchangeTest"/>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,10 @@
+<suite name="ChildSuite1" verbose="1">
+
+    <test name="GithubTest">
+        <parameter name="uri" value="https://api.github.com/"></parameter>
+        <classes>
+            <class name="com.wbl.tests.api.GitHubTest"/>
+        </classes>
+    </test>
+
+</suite>

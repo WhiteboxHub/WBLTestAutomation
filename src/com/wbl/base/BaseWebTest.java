@@ -2,7 +2,8 @@ package com.wbl.base;
 
 import com.wbl.utils.web.PageDriver;
 import com.wbl.utils.web.WBy;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 /**
  * Created by svelupula on 8/14/2015.

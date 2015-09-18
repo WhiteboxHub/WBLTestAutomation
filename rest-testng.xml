@@ -1,8 +1,7 @@
 <suite name="RestAutomation" verbose="1">
-    <test name="Smoke">
-        <classes>
-            <class name="com.wbl.tests.api.GitHubTest"/>
-          <!--  <class name="com.wbl.tests.api.StackExchangeTest"/>-->
-        </classes>
-    </test>
+    <suite-files>
+        <suite-file path="childSuite1.xml"/>
+        <suite-file path="childSuite2.xml"/>
+    </suite-files>
+
 </suite>

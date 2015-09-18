@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -20,12 +21,9 @@ public class Configuration {
     public String TestResultPath;
     public String TestDataPath;
     public int WaitTimeout;
-    public String ContentType;
-    public int ContentLength;
-    public String Locale;
-    public String Server;
-    public HashMap<String,String> JsonMap = new HashMap<String, String>();
     private Logger _logger;
+   // public String FilePath;
+    //public ArrayList<String> SheetNameList = new ArrayList<String>();
 
 
     public Configuration(boolean isWebTest) {
@@ -101,14 +99,12 @@ public class Configuration {
     public void setRestProps(Properties mProps)
     {
         BaseURI = mProps.getProperty("uri");
-        ContentType = mProps.getProperty("rest-content-type");
-        ContentLength = Integer.parseInt(mProps.getProperty("rest-content-length"));
-        Locale = mProps.getProperty("locale");
-        Server = mProps.getProperty("server");
-        setJsonProps(mProps);
+       // FilePath = mProps.getProperty("file-path");
+        //setSheetNames(mProps);
+       // setJsonProps(mProps);
     }
 
-    public void setJsonProps(Properties mProps)
+    /*public void setJsonProps(Properties mProps)
     {
         String jsonKeys = mProps.getProperty("json-keys");
         String jsonValues = mProps.getProperty("json-values");
@@ -120,5 +116,22 @@ public class Configuration {
             JsonMap.put(key,jsonValuesArr[count]);
             count++;
         }
-    }
+    }*/
+
+    /*public void setSheetNames(Properties mProps)
+    {
+        String sheetName = mProps.getProperty("sheet-name");
+        if(sheetName.contains(","))
+        {
+            String[] names = sheetName.split(",");
+            for(int i=0;i<names.length;i++)
+            {
+                SheetNameList.add(names[i]);
+            }
+        }
+        else
+        {
+            SheetNameList.add(sheetName);
+        }
+    }*/
 }

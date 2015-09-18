@@ -3,9 +3,7 @@ package com.wbl.tests.api;
 import com.wbl.base.BaseApiTest;
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 
@@ -14,11 +12,13 @@ import static org.testng.Assert.*;
  */
 public class StackExchangeTest extends BaseApiTest {
 
-
-    @BeforeClass
-    public void beforeClass() {
+    @BeforeTest
+    @Parameters({"uri"})
+    public void setBaseUri(String uri) {
         //data setup
+        restUtil.setUri(uri);
     }
+
 
     @DataProvider(name = "search-data")
     public Object[][] getSearchQuery() {
@@ -35,11 +35,16 @@ public class StackExchangeTest extends BaseApiTest {
             {
                 assertEquals(restUtil.header.getContentLength(),"500");
             }
-            assertEquals(restUtil.getJson().getPropertyCount(),30);
+            assertEquals(restUtil.getJson().getPropertyCount(),4);
             assertTrue(restUtil.getJson().isPropertyArray("items"));
-            assertEquals(restUtil.getJson().getArrayCount(),4);
+            assertEquals(restUtil.getJson().getArrayCount(),30);
             //restUtil.getJson().getArrayChildObject(1);
-            assertTrue(restUtil.getJson().isKeyAvailable("owner"));
+           // assertTrue(restUtil.getJson().isKeyAvailable("owner"));
     }
 
+    @AfterTest
+    public void clear()
+    {
+        restUtil.setUri(null);
+    }
 }
