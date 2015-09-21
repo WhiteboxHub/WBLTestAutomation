@@ -2,6 +2,9 @@ package com.wbl.utils.rest;
 
 import org.apache.http.Header;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Shilpi on 8/28/2015.
  */
@@ -43,4 +46,5 @@ public class Headers {
     {
         return getHeader("Date");
     }
+
 }

@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Created by svelupula on 8/25/2015.
@@ -101,6 +104,21 @@ public class RESTUtil {
         return resource;
     }
 
+    public Map<String,String> getFields(String fields)
+    {
+        Map<String,String> headerMap = new HashMap<>();
+        String[] arr = fields.split(",");
+        if(arr != null)
+        {
+            for(int i=0;i<arr.length;i++)
+            {
+                String[] fieldArr = arr[i].split(":");
+                headerMap.put(fieldArr[0],fieldArr[1]);
+            }
+        }
+
+        return headerMap;
+    }
 
     public String getUri() {
         return uri;

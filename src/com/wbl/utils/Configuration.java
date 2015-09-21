@@ -22,7 +22,7 @@ public class Configuration {
     public String TestDataPath;
     public int WaitTimeout;
     private Logger _logger;
-   // public String FilePath;
+    public String FilePath;
     //public ArrayList<String> SheetNameList = new ArrayList<String>();
 
 
@@ -99,7 +99,7 @@ public class Configuration {
     public void setRestProps(Properties mProps)
     {
         BaseURI = mProps.getProperty("uri");
-       // FilePath = mProps.getProperty("file-path");
+        FilePath = mProps.getProperty("file-path");
         //setSheetNames(mProps);
        // setJsonProps(mProps);
     }
