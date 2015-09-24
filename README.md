@@ -19,3 +19,6 @@ Automation Framework for Web UI/REST Api/Mobile Web and Mobile Native Apps with 
     RallyDev Integration (ToDo)
     Tool to generate CSS Selectors using browser plugin (ToDo)
     Jenkins Integration (ToDo)
+    File Upload Example (ToDo)
+    Login datadriven, window handles example (ToDo)
+    TestNG HTML report to email using Jenkins (ToDo)
