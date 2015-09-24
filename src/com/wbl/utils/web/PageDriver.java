@@ -218,21 +218,22 @@ public class PageDriver implements ElementsContainer {
 
         //Mobile Browsers using Chrome Emulation
         if (!_configuration.Device.toLowerCase().equals("desktop")) {
+
             Map<String, Object> chromeOptions = new HashMap<String, Object>();
             Map<String, String> mobileEmulation = new HashMap<String, String>();
             mobileEmulation.put("deviceName", _configuration.Device);
             chromeOptions.put("mobileEmulation", mobileEmulation);
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         }
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized"); //To maximize the browser
-        options.addArguments("allow-file-access-from-files");
-        options.addArguments("disable-rest-security");
-        options.addArguments("ignore-certifcate-errors");
-        options.addArguments("--always-authorize-plugins=true");
-
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        else {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("start-maximized"); //To maximize the browser
+            options.addArguments("allow-file-access-from-files");
+            options.addArguments("disable-rest-security");
+            options.addArguments("ignore-certifcate-errors");
+            options.addArguments("--always-authorize-plugins=true");
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        }
         return new ChromeDriver(capabilities);
     }
 
