@@ -6,6 +6,9 @@ import com.wbl.utils.web.WBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by svelupula on 8/14/2015.
@@ -26,22 +29,31 @@ public class LoginPage extends PortalPage {
 
     public boolean perfromLogin(String userName,String password)
     {
+        boolean isVisible = false;
         HtmlElement userId = driver.findElement("name=login.username");
         HtmlElement pwd =  driver.findElement("name=login.password");
-        userId.clear();
-        pwd.clear();
-        userId.sendKeys(userName);
-        pwd.sendKeys(password);
-        driver.findElement("login.loginBtn").click();
-      //  driver.implicitWait(120);
-        boolean isVisible = driver.findElement("id=home.logoutLink").isDisplayed();
+        try {
+            userId.clear();
+            pwd.clear();
+            userId.sendKeys(userName);
+            pwd.sendKeys(password);
+            driver.findElement("login.loginBtn").click();
+            driver.elementClickWait(WBy.get("id=home.logoutLink"));
+            isVisible = driver.findElement("id=home.logoutLink").isDisplayed();
+        }
+        catch (Exception e)
+        {
+            _logger.error(e);
+        }
         return isVisible;
 
     }
 
-    public String performLogout(String cookieName )
+    public String performLogout(String cookieName ) throws InterruptedException
     {
         driver.findElement("id=home.logoutLink").click();
+        driver.waitForLoad();
+        Thread.sleep(2000);
         return driver.getCookie(cookieName);
     }
 

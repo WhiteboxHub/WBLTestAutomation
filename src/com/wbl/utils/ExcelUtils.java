@@ -38,10 +38,8 @@ public class ExcelUtils {
             } else {
                 for (int colNum = 0; colNum < numberOfColumns; colNum++) {
                     Cell cell = row.getCell(colNum);
-                    if (cell == null
-                            || cell.getCellType() == Cell.CELL_TYPE_BLANK) {
-                        data[rowNum - 1][colNum] = "";
-                    } else {
+                    if (cell != null
+                            && cell.getCellType() != Cell.CELL_TYPE_BLANK) {
                         data[rowNum - 1][colNum] = objectFrom(workbook,
                                 cell);
                     }
@@ -161,15 +159,15 @@ public class ExcelUtils {
 
     private Object objectFrom(XSSFWorkbook workbook, Cell cell) {
         Object cellValue = null;
-        if (cell.getCellType() == Cell.CELL_TYPE_BLANK) {
-            cellValue = cell.getRichStringCellValue().getString();
-        } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-            cellValue = getNumericCellValue(cell);
-        } else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
-            cellValue = cell.getBooleanCellValue();
-        }
-        else {
-            cellValue = cell.getStringCellValue();
+        if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
+           if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                cellValue = getNumericCellValue(cell);
+            } else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+                cellValue = cell.getBooleanCellValue();
+            }
+            else {
+                cellValue = cell.getStringCellValue();
+            }
         }
 
         return cellValue;

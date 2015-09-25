@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -36,16 +37,15 @@ public class LoginPageTest extends BaseWebTest {
     public void testLogin(String uname,String pwd)
     {
         boolean actual = _lp.perfromLogin(uname, pwd);
-        System.out.println("the value is " + actual);
         assertTrue(actual);
     }
 
     @Test(dependsOnMethods = {"testLogin"})
-    public void testLogout()
+    public void testLogout() throws InterruptedException
     {
         String preSessionId = _lp.getCookie(cookieName);
         String postSessionId = _lp.performLogout(cookieName);
-        assertNotEquals(preSessionId,postSessionId);
+        assertNotEquals(preSessionId, postSessionId);
     }
 
 }

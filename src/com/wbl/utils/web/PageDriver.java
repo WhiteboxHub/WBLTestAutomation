@@ -10,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -152,6 +155,28 @@ public class PageDriver implements ElementsContainer {
     {
         _webDriver.manage().timeouts().implicitlyWait(timeout,TimeUnit.SECONDS);
     }
+
+
+    public void elementClickWait(By locator )
+    {
+        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void waitForLoad()
+    {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver _webDriver) {
+                        return ((JavascriptExecutor)_webDriver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+        wait.until(pageLoadCondition);
+    }
+
     private void start() {
         try {
             switch (_browser) {

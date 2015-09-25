@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -108,5 +110,7 @@ public class HtmlElement implements ElementsContainer {
     {
         _element.sendKeys(chars);
     }
+
+
 
 }

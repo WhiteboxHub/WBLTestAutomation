@@ -8,5 +8,7 @@
   "login.username":"uname",
   "login.password":"pwd",
   "login.loginBtn":"#login",
-  "home.logoutLink":"logout"
+  "home.logoutLink":"logout",
+  "login:errorMessage":".text-danger",
+  "portal:loader":"#loader"
 }
