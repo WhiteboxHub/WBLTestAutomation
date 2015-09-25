@@ -1,7 +1,0 @@
-<suite name="UIAutomation" verbose="1">
-    <test name="Smoke">
-        <classes>
-            <class name="com.wbl.tests.ui.HomePageTest"/>
-        </classes>
-    </test>
-</suite>

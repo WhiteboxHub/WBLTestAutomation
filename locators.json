@@ -3,5 +3,10 @@
   "header.social": "ul.social-icons",
   "header.social.links": "ul.social-icons li a",
   "home.slider.items": "#promo-slider ul li",
-  "header.home": ".navbar-nav li:first-child"
+  "header.home": ".navbar-nav li:first-child",
+  "home.loginLink":"loginButton",
+  "login.username":"uname",
+  "login.password":"pwd",
+  "login.loginBtn":"#login",
+  "home.logoutLink":"logout"
 }

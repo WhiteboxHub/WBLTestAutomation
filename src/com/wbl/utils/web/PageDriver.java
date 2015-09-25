@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PageDriver implements ElementsContainer {
 
-    private final Configuration _configuration;
+    public final Configuration _configuration;
     private final Browsers _browser;
     private WebDriver _webDriver;
     private String _mainWindowHandler;
@@ -142,6 +142,16 @@ public class PageDriver implements ElementsContainer {
         return "Browser";
     }
 
+    public String getCookie(String cookieName)
+    {
+        String value = null;
+        return _webDriver.manage().getCookieNamed(cookieName).getValue();
+    }
+
+    public void implicitWait(long timeout)
+    {
+        _webDriver.manage().timeouts().implicitlyWait(timeout,TimeUnit.SECONDS);
+    }
     private void start() {
         try {
             switch (_browser) {
@@ -240,5 +250,7 @@ public class PageDriver implements ElementsContainer {
     private HtmlUnitDriver startHtmlUnit() {
         return new HtmlUnitDriver();
     }
+
+
 
 }

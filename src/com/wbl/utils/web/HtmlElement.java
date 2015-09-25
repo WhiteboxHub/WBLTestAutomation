@@ -104,4 +104,9 @@ public class HtmlElement implements ElementsContainer {
         return String.format("<{0} class=\"{1}\" />", _element.getTagName(), getCssClass());
     }
 
+    public void sendKeys(String chars)
+    {
+        _element.sendKeys(chars);
+    }
+
 }

@@ -31,8 +31,8 @@
                <configuration>
                    <forkMode>always</forkMode>
                    <suiteXmlFiles>
-                       <suiteXmlFile>./testng.xml</suiteXmlFile>
-                       <suiteXmlFile>./rest-testng.xml</suiteXmlFile>
+                       <suiteXmlFile>./build/web/testng.xml</suiteXmlFile>
+                       <suiteXmlFile>./build/rest/rest-testng.xml</suiteXmlFile>
                    </suiteXmlFiles>
                </configuration>
            </plugin>

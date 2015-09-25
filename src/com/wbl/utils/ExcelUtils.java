@@ -23,7 +23,36 @@ public class ExcelUtils {
         _logger = Logger.getLogger(ExcelUtils.class);
     }
 
-    public Object[][] getExcelData(String filePath)
+    public Object[][] getSimpleExcelData(String filePath)
+            throws Exception {
+        XSSFWorkbook workbook = getWorkBook(filePath);
+        Sheet sheet = workbook.getSheetAt(workbook.getActiveSheetIndex());
+        int numberOfRows = sheet.getLastRowNum() + 1;
+        int numberOfColumns = countNonEmptyColumns(sheet);
+        data = new Object[numberOfRows-1][numberOfColumns];
+        for(int rowNum = 1;rowNum < numberOfRows;rowNum++)
+        {
+            Row row = sheet.getRow(rowNum);
+            if (isEmpty(row)) {
+                break;
+            } else {
+                for (int colNum = 0; colNum < numberOfColumns; colNum++) {
+                    Cell cell = row.getCell(colNum);
+                    if (cell == null
+                            || cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+                        data[rowNum - 1][colNum] = "";
+                    } else {
+                        data[rowNum - 1][colNum] = objectFrom(workbook,
+                                cell);
+                    }
+                }
+            }
+        }
+
+        return data;
+    }
+
+    public Object[][] getComplexExcelData(String filePath)
             throws Exception {
         XSSFWorkbook workbook = getWorkBook(filePath);
         Sheet sheet = workbook.getSheetAt(workbook.getActiveSheetIndex());

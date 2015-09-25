@@ -67,6 +67,7 @@ public class Configuration {
     public void setCommonProps(Properties mProps)
     {
         WaitTimeout = Integer.parseInt(mProps.getProperty("wait-timeout"));
+        FilePath = mProps.getProperty("file-path");
     }
     public void setWebProps(Properties mProps)
     {
@@ -99,7 +100,6 @@ public class Configuration {
     public void setRestProps(Properties mProps)
     {
         BaseURI = mProps.getProperty("uri");
-        FilePath = mProps.getProperty("file-path");
         //setSheetNames(mProps);
        // setJsonProps(mProps);
     }
