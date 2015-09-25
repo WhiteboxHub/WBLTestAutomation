@@ -1,9 +1,9 @@
 <suite name="UIAutomation" verbose="1">
-   <!-- <test name="Smoke">
+    <test name="Smoke">
         <classes>
             <class name="com.wbl.tests.ui.HomePageTest"/>
         </classes>
-    </test>-->
+    </test>
     <test name="LoginTest">
         <parameter name="seesionCookie" value="PHPSESSID"></parameter>
         <classes>
