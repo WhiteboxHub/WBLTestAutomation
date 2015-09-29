@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -164,6 +165,12 @@ public class PageDriver implements ElementsContainer {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void visibilityWait(By locator)
+    {
+        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
     public void waitForLoad()
     {
         ExpectedCondition<Boolean> pageLoadCondition = new
@@ -177,6 +184,25 @@ public class PageDriver implements ElementsContainer {
         wait.until(pageLoadCondition);
     }
 
+    public Actions initializeAction()
+    {
+        return new Actions(_webDriver);
+    }
+
+    public void switchToWindow()
+    {
+        String newWindow = _webDriver.getWindowHandle();
+        _webDriver.switchTo().window(newWindow);
+    }
+
+    public void windowHandles()
+    {
+        Iterator<String> handles = _webDriver.getWindowHandles().iterator();
+        while(handles.hasNext()){
+            String child = handles.next();
+            _webDriver.switchTo().window(child);
+        }
+    }
     private void start() {
         try {
             switch (_browser) {

@@ -18,24 +18,27 @@ public class LoginPageTest extends BaseWebTest {
 
     private LoginPage _lp;
     private String cookieName;
+    private String sheetName;
 
     @BeforeTest
-    @Parameters("seesionCookie")
-    public void init(String cookieName)
+    @Parameters({"seesionCookie","sheetName"})
+    public void init(String cookieName,String sheetName)
     {
         _lp = new LoginPage(driver);
         this.cookieName = cookieName;
+        this.sheetName = sheetName;
     }
 
     @DataProvider(name = "users-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.FilePath);
+        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.FilePath,sheetName);
         return data;
     }
 
     @Test(priority = 1,dataProvider = "users-data")
     public void testLogin(String uname,String pwd)
     {
+        _lp.getLoginPage();
         boolean actual = _lp.perfromLogin(uname, pwd);
         assertTrue(actual);
     }

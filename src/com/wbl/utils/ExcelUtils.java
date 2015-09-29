@@ -23,10 +23,10 @@ public class ExcelUtils {
         _logger = Logger.getLogger(ExcelUtils.class);
     }
 
-    public Object[][] getSimpleExcelData(String filePath)
+    public Object[][] getSimpleExcelData(String filePath,String sheetName)
             throws Exception {
         XSSFWorkbook workbook = getWorkBook(filePath);
-        Sheet sheet = workbook.getSheetAt(workbook.getActiveSheetIndex());
+        Sheet sheet = workbook.getSheet(sheetName);//workbook.getSheetAt(workbook.getActiveSheetIndex());
         int numberOfRows = sheet.getLastRowNum() + 1;
         int numberOfColumns = countNonEmptyColumns(sheet);
         data = new Object[numberOfRows-1][numberOfColumns];

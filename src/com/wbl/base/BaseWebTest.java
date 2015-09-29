@@ -23,6 +23,7 @@ public abstract class BaseWebTest extends BaseTest {
 
     @AfterSuite
     public void afterSuite() {
+
         driver.quit();
     }
 

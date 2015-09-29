@@ -111,6 +111,13 @@ public class HtmlElement implements ElementsContainer {
         _element.sendKeys(chars);
     }
 
+    public String getAttribute(String attribute)
+    {
+        return _element.getAttribute(attribute);
+    }
 
-
+    public void performClickAndHold(Actions action)
+    {
+        action.clickAndHold(_element).perform();
+    }
 }

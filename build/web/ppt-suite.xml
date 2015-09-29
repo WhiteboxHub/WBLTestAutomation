@@ -1,0 +1,8 @@
+<suite name="PPTSuite" verbose="1">
+    <test name="PresentationTest">
+        <parameter name="sheetName" value="ppt"></parameter>
+        <classes>
+            <class name="com.wbl.tests.ui.PresentationPageTest"/>
+        </classes>
+    </test>
+</suite>

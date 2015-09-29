@@ -1,0 +1,9 @@
+<suite name="LoginSuite" verbose="1">
+    <test name="LoginTest">
+        <parameter name="seesionCookie" value="PHPSESSID"></parameter>
+        <parameter name="sheetName" value="user"></parameter>
+        <classes>
+            <class name="com.wbl.tests.ui.LoginPageTest"/>
+        </classes>
+    </test>
+</suite>

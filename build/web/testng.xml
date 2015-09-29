@@ -1,13 +1,7 @@
 <suite name="UIAutomation" verbose="1">
-    <test name="Smoke">
-        <classes>
-            <class name="com.wbl.tests.ui.HomePageTest"/>
-        </classes>
-    </test>
-    <test name="LoginTest">
-        <parameter name="seesionCookie" value="PHPSESSID"></parameter>
-        <classes>
-            <class name="com.wbl.tests.ui.LoginPageTest"/>
-        </classes>
-    </test>
+    <suite-files>
+        <suite-file path="home-suite.xml"/>
+        <suite-file path="login-suite.xml"/>
+        <suite-file path="ppt-suite.xml"/>
+    </suite-files>
 </suite>
