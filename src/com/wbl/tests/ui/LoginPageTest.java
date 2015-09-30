@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
@@ -31,24 +33,28 @@ public class LoginPageTest extends BaseWebTest {
 
     @DataProvider(name = "users-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.FilePath,sheetName);
+        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFilePath,sheetName);
         return data;
     }
 
     @Test(priority = 1,dataProvider = "users-data")
-    public void testLogin(String uname,String pwd)
+    public void testLogin(String uname,String pwd)throws IOException
     {
         _lp.getLoginPage();
         boolean actual = _lp.perfromLogin(uname, pwd);
+        driver.takeScreenShot();
         assertTrue(actual);
+        driver.takeScreenShot();
     }
 
     @Test(dependsOnMethods = {"testLogin"})
-    public void testLogout() throws InterruptedException
+    public void testLogout() throws InterruptedException,IOException
     {
         String preSessionId = _lp.getCookie(cookieName);
         String postSessionId = _lp.performLogout(cookieName);
+        driver.takeScreenShot();
         assertNotEquals(preSessionId, postSessionId);
+        driver.takeScreenShot();
     }
 
 }

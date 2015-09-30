@@ -2,10 +2,7 @@ package com.wbl.tests.ui;
 
 import com.wbl.base.BaseWebTest;
 import com.wbl.pages.PresentationPage;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
@@ -28,15 +25,22 @@ public class PresentationPageTest extends BaseWebTest {
 
     @DataProvider(name = "ppt-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.FilePath,sheetName);
+        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFilePath,sheetName);
         return data;
     }
 
     @Test(priority = 1,dataProvider = "ppt-data")
     public void testPresentations(String uname,String pwd,String pptName,String pptPwd) throws InterruptedException,Exception
     {
-        _pp.getPresentation(uname, pwd, pptName, pptPwd);
+        boolean actual = _pp.getPresentation(uname, pwd, pptName, pptPwd);
+        assertTrue(actual);
+        driver.takeScreenShot();
     }
 
+    @AfterTest
+    public void close()
+    {
+        driver.close();
+    }
 
 }

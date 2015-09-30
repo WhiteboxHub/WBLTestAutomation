@@ -22,7 +22,9 @@ public class Configuration {
     public String TestDataPath;
     public int WaitTimeout;
     private Logger _logger;
-    public String FilePath;
+    public String DataFilePath;
+    public boolean TakeScreenShot;
+    public String ScreenFolderPath;
     //public ArrayList<String> SheetNameList = new ArrayList<String>();
 
 
@@ -67,7 +69,7 @@ public class Configuration {
     public void setCommonProps(Properties mProps)
     {
         WaitTimeout = Integer.parseInt(mProps.getProperty("wait-timeout"));
-        FilePath = mProps.getProperty("file-path");
+        DataFilePath = mProps.getProperty("data-file-path");
     }
     public void setWebProps(Properties mProps)
     {
@@ -95,6 +97,8 @@ public class Configuration {
         Device = mProps.getProperty("device");
         TestResultPath = mProps.getProperty("test-result-path");
         TestDataPath = mProps.getProperty("test-data-path");
+        TakeScreenShot = Boolean.valueOf(mProps.getProperty("takeScreenShot"));
+        ScreenFolderPath = mProps.getProperty("screenshot-folder-path");
     }
 
     public void setRestProps(Properties mProps)

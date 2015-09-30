@@ -5,6 +5,8 @@ import com.wbl.pages.HomePage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -20,8 +22,10 @@ public class HomePageTest extends BaseWebTest {
     }
 
     @Test(priority = 1, alwaysRun = true)
-    public void testSlidesCount() {
+    public void testSlidesCount() throws IOException{
+        driver.takeScreenShot();
         assertEquals(8, _hp.getSliderItemsCount());
+        driver.takeScreenShot();
     }
 
 

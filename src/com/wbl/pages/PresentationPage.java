@@ -19,26 +19,28 @@ public class PresentationPage extends PortalPage {
         this._lp = new LoginPage(driver);
     }
 
-    public boolean getPresentation(String userName,String pwd,String pptName,String pptPwd) throws InterruptedException,Exception
+    public boolean getPresentation(String userName,String pwd,String pptName,String pptPwd)
     {
         boolean status = false;
-        _lp.getLoginPage();
-        status = _lp.perfromLogin(userName,pwd);
-        if(status)
-        {
-            Actions action = driver.initializeAction();
-            HtmlElement resourceElement  = driver.findElement("home:resource");
-            resourceElement.performClickAndHold(action);
-            clickOnPresentation();
-            openPresentation(pptName,pptPwd);
-
-
+        try {
+            _lp.getLoginPage();
+            status = _lp.perfromLogin(userName, pwd);
+            if (status) {
+                Actions action = driver.initializeAction();
+                HtmlElement resourceElement = driver.findElement("home:resource");
+                resourceElement.performClickAndHold(action);
+                driver.takeScreenShot();
+                clickOnPresentation();
+                driver.takeScreenShot();
+                openPresentation(pptName, pptPwd);
+            }
         }
-        else
+        catch (Exception e)
         {
-            return status;
+            status = false;
+            _logger.error(e);
         }
-        return true;
+        return status;
     }
 
     public void clickOnPresentation() throws Exception
@@ -68,12 +70,14 @@ public class PresentationPage extends PortalPage {
                 //driver.visibilityWait(WBy.get("class=presentation.dialog"));
                 HtmlElement pwdDialog = driver.findElement("presentation.dialog.input");
                 System.out.println(pwdDialog);
-                if(pwdDialog.isDisplayed())
+                if(pwdDialog != null && pwdDialog.isDisplayed())
                 {
                     driver.switchToWindow();
+                    driver.takeScreenShot();
                     driver.findElement("presentation.dialog.input").sendKeys(pptPwd);
                     driver.findElement("presentation.dialog.submit").click();
                     HtmlElement downloadLink = driver.findElement("presentation.dialog.download");
+                    driver.takeScreenShot();
                     if(downloadLink != null && driver.findElement("presentation.dialog.download").isDisplayed())
                     {
                         driver.findElement("presentation.dialog.download").click();
