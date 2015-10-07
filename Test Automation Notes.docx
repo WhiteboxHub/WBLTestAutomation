@@ -1,0 +1,89 @@
+•	Native API
+•	Selenium Server
+•	JSON Wire protocol – 
+
+•	WebDriver
+
+    o	goToUrl
+    o	findElement – WebElement - NoSuchElementException
+    o	findElements – List<WebElements> - null - TimeoutException
+    o	close
+    o	quit
+    o	getTitle
+    o	getPageSource
+    o	getWindowHandles – Set<String>
+    o	getCurrentWindowHandle
+    o	manage()
+    o	timeouts()
+    o	window()
+    •	WebElement
+    o	Click 
+    o	SendKeys
+    o	findElement
+    o	findElements
+    o	submit
+    o	clear
+    o	getAttribute
+    o	isDisplayed
+    o	getValue
+    o	getText
+
+•	Actions - sendKeys
+•	Accessors – getTitle, 
+•	Assertions – isChecked, isDisplayed
+•	By – static class
+•	By.id, name, xpath, css, classname, tagname, linkText, partialLinkText
+•	JavascriptExecutor – ()
+•	executeScript(’)
+•	Ajax
+•	implicitWait – thread.sleep – 1000, timeu
+•	explicitWaits
+•	WebDriverWait
+  o	ExpectedCondition
+  o	TimOut 5 sec
+  o	Polling – 1 sec
+•	FluentWait
+•	WindowHandles – 
+•	Window handle – guid –fhdjkh-ggdfg=fggfdggdf-gdggd
+•	Driver.SwitchTo(handle)
+•	Driver.SwitchTo()
+•	Driver.manage().cookies
+•	(TakeScreenShot)
+•	saveOutPutAs
+•	org.openqa.selenium.*
+•	org.openqa.selenium.support.ui.*
+•	Select API – 
+•	Drag and Drop – Actions API
+•	FileUpload – 
+•	AutoIt – exe
+•	Driver.findElement().click
+•	Autoit
+•	PageDriver.uiplo0ad
+•	FirefoxDriver
+    o	New FirefoxDriver
+    o	DesiredCapabilities capabilities = new DesiredCapabilities();
+    o	Capabilities.setPreference(‘max-timeout’, 60);
+    o	New FirefoxDriver(Capabilities)
+    o	New FirefoxDriver(FirefoxProfile)
+•	ChromeDriver
+    o	New ChromDriver()
+    o	ChromeDriverServer.EXE
+    o	ChromeOptions
+    o	Capabilties
+•	InternetExplorerDriver
+    o	InternetExplorer
+    o	InternetExplorerSserver.EXE
+•	SimpleBrowserDriver
+•	MSTEST
+•	TestMethod – Assertion
+•	TestClassSetup
+•	TestClassTearDown
+•	TestContext – Data.
+•	AssemblyInitialize
+•	TestSettings
+•	CSS Selectors
+•	Primary - ., # tagname
+•	Nested ones
+•	Attribute Selector
+•	Pseudo Selectors
+•	Nested Pseudo Selectors
