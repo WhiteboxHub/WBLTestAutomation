@@ -12,11 +12,14 @@
   "login:errorMessage":".text-danger",
   "portal:loader":"#loader",
   "home:resource":".dropdown-toggle",
-  "home:resource.presentation":".dropdown-menu>li>a",
+  "home:resource.list":".dropdown-menu>li>a",
   "presentation:list":".//*[@id='presentations']/div/div/div/div/table/tbody/tr/td[2]/a",
   "presentation.dialog":"drive-viewer-password-dialog",
   "presentation.text":"Presentations",
   "presentation.dialog.input":".drive-viewer-password-input",
   "presentation.dialog.submit":"div.drive-viewer-password-submit.drive-viewer-dark-button.goog-inline-block.drive-viewer-button",
-  "presentation.dialog.download":"div.drive-viewer-content-download-button-text"
+  "presentation.dialog.download":"div.drive-viewer-content-download-button-text",
+  "recordings.text":"Recordings",
+  "recordings.batch.id":"batch",
+  "recordings.recording.id":"classRecording"
 }

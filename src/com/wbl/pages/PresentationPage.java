@@ -45,7 +45,7 @@ public class PresentationPage extends PortalPage {
 
     public void clickOnPresentation() throws Exception
     {
-        List<HtmlElement> elements = (List)driver.findElements("home:resource.presentation");
+        List<HtmlElement> elements = (List)driver.findElements("home:resource.list");
         for (HtmlElement element : elements)
         {
             if(element.getAttribute("href").contains("presentations"))
