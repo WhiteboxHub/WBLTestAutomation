@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="MobileAutomation" verbose="1">
+    <suite-files>
+        <suite-file path="childSuite1.xml"/>
+        <suite-file path="childSuite2.xml"/>
+        <suite-file path="childSuite3.xml"/>
+    </suite-files>
+</suite>

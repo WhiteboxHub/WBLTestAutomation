@@ -1,0 +1,8 @@
+<suite name="recordSuite" verbose="1">
+    <test name="RecordingsTest">
+        <parameter name="sheetName" value="recordings"></parameter>
+        <classes>
+            <class name="com.wbl.tests.ui.RecordingsPageTest"/>
+        </classes>
+    </test>
+</suite>

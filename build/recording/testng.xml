@@ -1,0 +1,8 @@
+<suite name="UIAutomation" verbose="1">
+    <suite-files>
+        <suite-file path="home-suite.xml"/>
+        <suite-file path="login-suite.xml"/>
+        <suite-file path="ppt-suite.xml"/>
+        <suite-file path="recording-suite.xml"/>
+    </suite-files>
+</suite>
