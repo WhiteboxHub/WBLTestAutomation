@@ -2,6 +2,7 @@
   "header.logo": ".logo img#logo",
   "header.social": "ul.social-icons",
   "header.social.links": "ul.social-icons li a",
+  "header.social.fblink":"ul.social-icons li:nth-child(2) a",
   "home.slider.items": "#promo-slider ul li",
   "header.home": ".navbar-nav li:first-child",
   "home.loginLink":"loginButton",

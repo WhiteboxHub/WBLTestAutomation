@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 /**
  * Created by svelupula on 8/14/2015.
@@ -27,6 +27,14 @@ public class HomePageTest extends BaseWebTest {
         assertEquals(8, _hp.getSliderItemsCount());
         driver.takeScreenShot();
     }
+    
+    @Test
+    public void testFBLink()
+    {
+        String url = _hp.getFacebookPage();
+        assertTrue(url.contains("facebook"));
+    }
+
 
 
 }

@@ -148,6 +148,11 @@ public class PageDriver implements ElementsContainer {
         }
     }
 
+    public WebDriver getWebDriver()
+    {
+    	return _webDriver;
+    }
+    
     public Object ExecuteJavaScript(String javaScript, Object[] args) {
         JavascriptExecutor javaScriptExecutor = (JavascriptExecutor) _webDriver;
 
