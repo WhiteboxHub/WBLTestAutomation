@@ -32,6 +32,7 @@
                    <suiteXmlFiles>
                        <suiteXmlFile>./build/web/testng.xml</suiteXmlFile>
                        <suiteXmlFile>./build/rest/rest-testng.xml</suiteXmlFile>
+                       <suiteXmlFile>./build/mobile/Testng.xml</suiteXmlFile>
                    </suiteXmlFiles>
                </configuration>
            </plugin>
