@@ -20,7 +20,6 @@
                 <target>1.7</target>
                 <showDeprecation>true</showDeprecation>
                 <showWarnings>true</showWarnings>
-                <executable>${JAVA_1_7_HOME}/bin/javac</executable>
                 <fork>true</fork>
             </configuration>
            </plugin>
@@ -33,6 +32,7 @@
                    <suiteXmlFiles>
                        <suiteXmlFile>./build/web/testng.xml</suiteXmlFile>
                        <suiteXmlFile>./build/rest/rest-testng.xml</suiteXmlFile>
+                       <suiteXmlFile>./build/mobile/Testng.xml</suiteXmlFile>
                    </suiteXmlFiles>
                </configuration>
            </plugin>
