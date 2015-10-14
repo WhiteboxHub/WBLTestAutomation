@@ -34,7 +34,7 @@ public class PresentationPageTest extends BaseWebTest {
     {
         boolean actual = _pp.getPresentation(uname, pwd, pptName, pptPwd);
         assertTrue(actual);
-        driver.takeScreenShot();
+        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
     }
 
     @AfterTest

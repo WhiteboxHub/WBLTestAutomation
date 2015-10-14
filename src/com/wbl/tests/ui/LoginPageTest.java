@@ -42,9 +42,9 @@ public class LoginPageTest extends BaseWebTest {
     {
         _lp.getLoginPage();
         boolean actual = _lp.perfromLogin(uname, pwd);
-        driver.takeScreenShot();
+        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
         assertTrue(actual);
-        driver.takeScreenShot();
+        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
     }
 
     @Test(dependsOnMethods = {"testLogin"})
@@ -52,9 +52,9 @@ public class LoginPageTest extends BaseWebTest {
     {
         String preSessionId = _lp.getCookie(cookieName);
         String postSessionId = _lp.performLogout(cookieName);
-        driver.takeScreenShot();
+        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
         assertNotEquals(preSessionId, postSessionId);
-        driver.takeScreenShot();
+        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
     }
 
 }

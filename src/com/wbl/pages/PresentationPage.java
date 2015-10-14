@@ -29,9 +29,9 @@ public class PresentationPage extends PortalPage {
                 Actions action = driver.initializeAction();
                 HtmlElement resourceElement = driver.findElement("home:resource");
                 resourceElement.performClickAndHold(action);
-                driver.takeScreenShot();
+                driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                 clickOnPresentation();
-                driver.takeScreenShot();
+                driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                 openPresentation(pptName, pptPwd);
             }
         }
@@ -73,11 +73,11 @@ public class PresentationPage extends PortalPage {
                 if(pwdDialog != null && pwdDialog.isDisplayed())
                 {
                     driver.switchToWindow();
-                    driver.takeScreenShot();
+                    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                     driver.findElement("presentation.dialog.input").sendKeys(pptPwd);
                     driver.findElement("presentation.dialog.submit").click();
                     HtmlElement downloadLink = driver.findElement("presentation.dialog.download");
-                    driver.takeScreenShot();
+                    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
                     if(downloadLink != null && driver.findElement("presentation.dialog.download").isDisplayed())
                     {
                         driver.findElement("presentation.dialog.download").click();

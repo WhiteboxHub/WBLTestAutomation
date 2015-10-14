@@ -23,11 +23,11 @@ public class HomePageTest extends BaseWebTest {
 
     @Test(priority = 1, alwaysRun = true)
     public void testSlidesCount() throws IOException{
-        driver.takeScreenShot();
-        assertEquals(8, _hp.getSliderItemsCount());
-        driver.takeScreenShot();
-    }
-    
+    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+    assertEquals(8, _hp.getSliderItemsCount());
+    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
+}
+
     @Test(priority = 2)
     public void testFBLink()
     {

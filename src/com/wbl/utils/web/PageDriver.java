@@ -33,7 +33,8 @@ public class PageDriver implements ElementsContainer {
     private WebDriver _webDriver;
     private String _mainWindowHandler;
     private Logger _logger;
-    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    private WScreenshot wScreenshot;// = new WScreenshot(_webDriver);
+
 
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
@@ -140,14 +141,6 @@ public class PageDriver implements ElementsContainer {
         return links;
     }
 
-    public void saveScreenShot(String path) {
-        try {
-            FileUtils.copyFile(((TakesScreenshot) _webDriver).getScreenshotAs(OutputType.FILE), new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public WebDriver getWebDriver()
     {
     	return _webDriver;
@@ -212,25 +205,7 @@ public class PageDriver implements ElementsContainer {
         _webDriver.switchTo().window(newWindow);
     }
 
-    public void takeScreenShot()throws IOException
-    {
-        if(_configuration.TakeScreenShot)
-        {
-          /*  String date = getFormattedDate();
-            String newDir = _configuration.ScreenFolderPath+"/"+date;
-            File file = new File(newDir);
-            if(!file.exists()) {
-                new File(newDir).mkdir();
-            }
-            String latestFilePath = file.getPath();
-            int count =  new File(latestFilePath).listFiles().length+1 ;*/
-            File scrFile = ((TakesScreenshot)_webDriver).getScreenshotAs(OutputType.FILE);
-           // File file =  new File(_configuration.ScreenFolderPath+"\\"+date.toString());
-            //String path = newDir+"/Screen"+count+".png";
-          //  FileUtils.copyFile(scrFile, new File(path));
 
-        }
-    }
 
     public void windowHandles()
     {
@@ -241,10 +216,7 @@ public class PageDriver implements ElementsContainer {
         }
     }
 
-    public String getFormattedDate()
-    {
-        return format.format(new Date()).toString();
-    }
+
     private void start() {
         try {
             switch (_browser) {
@@ -344,6 +316,13 @@ public class PageDriver implements ElementsContainer {
         return new HtmlUnitDriver();
     }
 
+    public WScreenshot getwScreenshot() {
+        wScreenshot = new WScreenshot((TakesScreenshot)_webDriver);
+        return wScreenshot;
+    }
 
+//    public void setwScreenshot(WScreenshot wScreenshot) {
+//        this.wScreenshot = wScreenshot;
+//    }
 
 }
