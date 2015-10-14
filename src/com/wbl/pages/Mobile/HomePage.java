@@ -2,7 +2,7 @@ package com.wbl.pages.Mobile;
 
 import org.openqa.selenium.By;
 
-import com.wbl.appium.utils.WaitClass;
+import com.wbl.utils.mobile.WaitClass;
 
 import io.appium.java_client.AppiumDriver;
 
