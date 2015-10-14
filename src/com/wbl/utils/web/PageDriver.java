@@ -34,7 +34,6 @@ public class PageDriver implements ElementsContainer {
     private String _mainWindowHandler;
     private Logger _logger;
     private WScreenshot wScreenshot;
-    private WActions wActions;
 
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
