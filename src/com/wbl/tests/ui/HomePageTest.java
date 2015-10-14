@@ -28,7 +28,7 @@ public class HomePageTest extends BaseWebTest {
         driver.takeScreenShot();
     }
     
-    @Test
+    @Test(priority = 2)
     public void testFBLink()
     {
         String url = _hp.getFacebookPage();
