@@ -216,18 +216,18 @@ public class PageDriver implements ElementsContainer {
     {
         if(_configuration.TakeScreenShot)
         {
-            String date = getFormattedDate();
+          /*  String date = getFormattedDate();
             String newDir = _configuration.ScreenFolderPath+"/"+date;
             File file = new File(newDir);
             if(!file.exists()) {
                 new File(newDir).mkdir();
             }
             String latestFilePath = file.getPath();
-            int count =  new File(latestFilePath).listFiles().length+1 ;
+            int count =  new File(latestFilePath).listFiles().length+1 ;*/
             File scrFile = ((TakesScreenshot)_webDriver).getScreenshotAs(OutputType.FILE);
            // File file =  new File(_configuration.ScreenFolderPath+"\\"+date.toString());
-            String path = newDir+"/Screen"+count+".png";
-            FileUtils.copyFile(scrFile, new File(path));
+            //String path = newDir+"/Screen"+count+".png";
+          //  FileUtils.copyFile(scrFile, new File(path));
 
         }
     }
