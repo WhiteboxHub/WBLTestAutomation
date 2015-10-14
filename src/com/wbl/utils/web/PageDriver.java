@@ -33,8 +33,8 @@ public class PageDriver implements ElementsContainer {
     private WebDriver _webDriver;
     private String _mainWindowHandler;
     private Logger _logger;
-    private WScreenshot wScreenshot;// = new WScreenshot(_webDriver);
-
+    private WScreenshot wScreenshot;
+    private WActions wActions;
 
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
@@ -66,6 +66,7 @@ public class PageDriver implements ElementsContainer {
         try {
             return new HtmlElement(this, _webDriver.findElement(WBy.get(locator)));
         } catch (Exception ex) {
+            ex.printStackTrace();
             _logger.error(ex);
             return null;
         }
@@ -85,6 +86,7 @@ public class PageDriver implements ElementsContainer {
             }
             return elements;
         } catch (Exception ex) {
+            ex.printStackTrace();
             _logger.error(ex);
             return null;
         }
