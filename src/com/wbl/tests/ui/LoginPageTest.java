@@ -2,6 +2,7 @@ package com.wbl.tests.ui;
 
 import com.wbl.base.BaseWebTest;
 import com.wbl.pages.LoginPage;
+import com.wbl.utils.web.Browsers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
@@ -42,8 +43,10 @@ public class LoginPageTest extends BaseWebTest {
     {
         _lp.getLoginPage();
         boolean actual = _lp.perfromLogin(uname, pwd);
+        if(driver.getBrowser() != Browsers.HtmlUnit)
         driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
         assertTrue(actual);
+        if(driver.getBrowser() != Browsers.HtmlUnit)
         driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
     }
 
@@ -52,8 +55,10 @@ public class LoginPageTest extends BaseWebTest {
     {
         String preSessionId = _lp.getCookie(cookieName);
         String postSessionId = _lp.performLogout(cookieName);
+        if(driver.getBrowser() != Browsers.HtmlUnit)
         driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
         assertNotEquals(preSessionId, postSessionId);
+        if(driver.getBrowser() != Browsers.HtmlUnit)
         driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
     }
 

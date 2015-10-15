@@ -1,8 +1,6 @@
 package com.wbl.pages;
 
-import com.wbl.utils.web.HtmlElement;
-import com.wbl.utils.web.PageDriver;
-import com.wbl.utils.web.WBy;
+import com.wbl.utils.web.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
@@ -29,8 +27,10 @@ public class PresentationPage extends PortalPage {
                 Actions action = driver.initializeAction();
                 HtmlElement resourceElement = driver.findElement("home:resource");
                 resourceElement.performClickAndHold(action);
-                driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+                if(driver.getBrowser() != Browsers.HtmlUnit)
+                 driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                 clickOnPresentation();
+                if(driver.getBrowser() != Browsers.HtmlUnit)
                 driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                 openPresentation(pptName, pptPwd);
             }
@@ -73,10 +73,12 @@ public class PresentationPage extends PortalPage {
                 if(pwdDialog != null && pwdDialog.isDisplayed())
                 {
                     driver.switchToWindow();
+                    if(driver.getBrowser() != Browsers.HtmlUnit)
                     driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                     driver.findElement("presentation.dialog.input").sendKeys(pptPwd);
                     driver.findElement("presentation.dialog.submit").click();
                     HtmlElement downloadLink = driver.findElement("presentation.dialog.download");
+                    if(driver.getBrowser() != Browsers.HtmlUnit)
                     driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
                     if(downloadLink != null && driver.findElement("presentation.dialog.download").isDisplayed())
                     {

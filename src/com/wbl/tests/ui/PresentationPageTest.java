@@ -2,6 +2,7 @@ package com.wbl.tests.ui;
 
 import com.wbl.base.BaseWebTest;
 import com.wbl.pages.PresentationPage;
+import com.wbl.utils.web.Browsers;
 import org.testng.annotations.*;
 
 import static org.testng.Assert.assertNotEquals;
@@ -34,6 +35,7 @@ public class PresentationPageTest extends BaseWebTest {
     {
         boolean actual = _pp.getPresentation(uname, pwd, pptName, pptPwd);
         assertTrue(actual);
+        if(driver.getBrowser() != Browsers.HtmlUnit)
         driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
     }
 
