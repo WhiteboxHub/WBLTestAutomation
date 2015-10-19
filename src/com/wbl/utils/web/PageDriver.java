@@ -35,6 +35,8 @@ public class PageDriver implements ElementsContainer {
     private Logger _logger;
     private WScreenshot wScreenshot;
 
+    private WwindowHandles wWindowHandles;
+
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
         _browser = _configuration.Browser;
@@ -163,60 +165,52 @@ public class PageDriver implements ElementsContainer {
         return _webDriver.manage().getCookieNamed(cookieName).getValue();
     }
 
-    public void implicitWait(long timeout)
+    public void implicitWait(long timeout)throws Exception
     {
+        if (_browser != Browsers.HtmlUnit) {
         _webDriver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+            return;
+        }
+        Thread.sleep(timeout);
     }
 
 
     public void elementClickWait(By locator )
     {
-        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
-        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        if (_browser != Browsers.HtmlUnit) {
+            long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+            WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
+        }
     }
 
     public void visibilityWait(By locator)
     {
-        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
-        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        if (_browser != Browsers.HtmlUnit) {
+            long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+            WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
     }
     public void waitForLoad()
     {
-        ExpectedCondition<Boolean> pageLoadCondition = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver _webDriver) {
-                        return ((JavascriptExecutor)_webDriver).executeScript("return document.readyState").equals("complete");
-                    }
-                };
-        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
-        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
-        wait.until(pageLoadCondition);
+        if (_browser != Browsers.HtmlUnit) {
+            ExpectedCondition<Boolean> pageLoadCondition = new
+                    ExpectedCondition<Boolean>() {
+                        public Boolean apply(WebDriver _webDriver) {
+                            return ((JavascriptExecutor) _webDriver).executeScript("return document.readyState").equals("complete");
+                        }
+                    };
+            long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+            WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+            wait.until(pageLoadCondition);
+        }
     }
 
     public Actions initializeAction()
     {
         return new Actions(_webDriver);
     }
-
-    public void switchToWindow()
-    {
-        String newWindow = _webDriver.getWindowHandle();
-        _webDriver.switchTo().window(newWindow);
-    }
-
-
-
-    public void windowHandles()
-    {
-        Iterator<String> handles = _webDriver.getWindowHandles().iterator();
-        while(handles.hasNext()){
-            String child = handles.next();
-            _webDriver.switchTo().window(child);
-        }
-    }
-
 
     private void start() {
         try {
@@ -318,7 +312,8 @@ public class PageDriver implements ElementsContainer {
     }
 
     public WScreenshot getwScreenshot() {
-        wScreenshot = new WScreenshot((TakesScreenshot)_webDriver);
+        if(_browser != Browsers.HtmlUnit)
+          wScreenshot = new WScreenshot((TakesScreenshot)_webDriver);
         return wScreenshot;
     }
 
@@ -326,4 +321,9 @@ public class PageDriver implements ElementsContainer {
 //        this.wScreenshot = wScreenshot;
 //    }
 
+    public WwindowHandles getwWindowHandles() {
+        if(_webDriver != null)
+            wWindowHandles = new WwindowHandles(_webDriver);
+        return wWindowHandles;
+    }
 }

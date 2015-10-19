@@ -25,17 +25,17 @@ public class HomePageTest extends BaseWebTest {
     @Test(priority = 1, alwaysRun = true)
     public void testSlidesCount() throws IOException{
     if(driver.getBrowser() != Browsers.HtmlUnit)
-    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+     driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
     assertEquals(6, _hp.getSliderItemsCount());
     if(driver.getBrowser() != Browsers.HtmlUnit)
-    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
+     driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
 }
 
     @Test(priority = 2)
     public void testFBLink()
     {
-        String url = _hp.getFacebookPage();
-        assertTrue(url.contains("facebook"));
+        boolean isFBPage = _hp.getFacebookPage();
+        assertTrue(isFBPage);
     }
 
 

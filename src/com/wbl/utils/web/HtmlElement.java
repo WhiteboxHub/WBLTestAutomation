@@ -120,4 +120,10 @@ public class HtmlElement implements ElementsContainer {
     {
         action.clickAndHold(_element).perform();
     }
+
+    public void mouseOver(Actions action)
+    {
+        action.moveToElement(_element).build().perform();
+    }
+
 }

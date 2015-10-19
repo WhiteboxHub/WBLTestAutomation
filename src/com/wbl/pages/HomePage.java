@@ -23,26 +23,29 @@ public class HomePage extends PortalPage {
     
 
 
-    public String getFacebookPage()
+    public boolean getFacebookPage()
     {
+        boolean status = false;
         try{
 	        driver.visibilityWait(WBy.get("header.social.fblink"));
-	        WebDriver wd = driver.getWebDriver();
-	        WebElement element = wd.findElement(WBy.get("header.social.fblink"));
             if(driver.getBrowser() != Browsers.HtmlUnit) {
+                WebDriver wd = driver.getWebDriver();
+                WebElement element = wd.findElement(WBy.get("header.social.fblink"));
                 WJavascriptExecutor js = new WJavascriptExecutor(wd, element);
                 js.executeScript("arguments[0].click();");
             }
             else
             {
-                element.click();
+                driver.findElement("header.social.fblink").click();
             }
+
+            status = driver.getCurrentUrl().contains("facebook")?true:false;
         }
         catch(Exception e)
         {
         	_logger.error(e);
         }
-        return driver.getCurrentUrl();
+        return status;
     }
 
 

@@ -26,7 +26,8 @@ public class PresentationPage extends PortalPage {
             if (status) {
                 Actions action = driver.initializeAction();
                 HtmlElement resourceElement = driver.findElement("home:resource");
-                resourceElement.performClickAndHold(action);
+                resourceElement.mouseOver(action);
+                //resourceElement.performClickAndHold(action);
                 if(driver.getBrowser() != Browsers.HtmlUnit)
                  driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                 clickOnPresentation();
@@ -65,14 +66,14 @@ public class PresentationPage extends PortalPage {
             if(ppt.getText().equalsIgnoreCase(pptName))
             {
                 ppt.click();
-                driver.windowHandles();
+                driver.getwWindowHandles().windowHandles();
                 driver.waitForLoad();
                 //driver.visibilityWait(WBy.get("class=presentation.dialog"));
                 HtmlElement pwdDialog = driver.findElement("presentation.dialog.input");
                 System.out.println(pwdDialog);
                 if(pwdDialog != null && pwdDialog.isDisplayed())
                 {
-                    driver.switchToWindow();
+                    driver.getwWindowHandles().switchToWindow();
                     if(driver.getBrowser() != Browsers.HtmlUnit)
                     driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
                     driver.findElement("presentation.dialog.input").sendKeys(pptPwd);
