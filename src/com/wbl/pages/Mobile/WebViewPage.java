@@ -15,10 +15,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 
 public class WebViewPage {
-	
+
 	@FindBy(id="io.selendroid.testapp:id/spinner_webdriver_test_data")
 	public AndroidElement spinnerButton;
-	
+
 
 	@FindBy(id="io.selendroid.testapp:id/goBack")
 	public AndroidElement goBackButton;
@@ -29,10 +29,10 @@ public class WebViewPage {
 	{
 		this.appiumDriver=appiumDriver;
 	}
-	
+
 	public void selectWebViewHtml(String text)
 	{
-		
+
 		appiumDriver.tap(1, spinnerButton,1);
 		WaitClass.waitFor(appiumDriver,By.id("android:id/select_dialog_listview"),60);
 		//WebElement ddbutton = appiumDriver.findElement(By.className("android.widget.EditText"));
@@ -45,7 +45,7 @@ public class WebViewPage {
 				appiumDriver.tap(1,item,1);;
 				break;
 			}
-				
+
 		}
 	}
 	public void switchToWebView()
@@ -57,5 +57,5 @@ public class WebViewPage {
 			appiumDriver.context(text);
 		}
 	}
-	
+
 }

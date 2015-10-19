@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite 2" verbose="1" >
-  <test name="HomePageTest">
+  <test name="RegistrationPageTest">
     <classes>
-      <class name="com.wbl.appium.tests.RegistrationPageTest"/>
+      <class name="com.wbl.tests.Mobile.RegistrationPageTest"/>
     </classes>
   </test>
 </suite>
