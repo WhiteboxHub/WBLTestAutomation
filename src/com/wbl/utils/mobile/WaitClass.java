@@ -16,19 +16,21 @@ import com.google.common.base.Function;
 
 
 public class WaitClass {
-	
+
 	public static WebElement waitFor(AppiumDriver appiumDriver,final By locator,long timeout) throws TimeoutException
 	{
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(appiumDriver)  
-		             .withTimeout(timeout, TimeUnit.SECONDS)  
-		             .pollingEvery(2, TimeUnit.SECONDS)  
-		             .ignoring(NoSuchElementException.class,WebDriverException.class); 
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(appiumDriver)
+				.withTimeout(timeout, TimeUnit.SECONDS)
+				.pollingEvery(2, TimeUnit.SECONDS)
+				.ignoring(NoSuchElementException.class,WebDriverException.class);
 
-		     WebElement element= wait.until(new Function<WebDriver,WebElement>() {  
-		           public WebElement apply(WebDriver driver) {  
-		             return driver.findElement(locator);  
-		            }  
-		      });  
-		  return element;  
-		 }
+		WebElement element= wait.until(new Function<WebDriver,WebElement>()
+		{
+			public WebElement apply(WebDriver driver)
+			{
+				return driver.findElement(locator);
+			}
+		});
+		return element;
+	}
 }

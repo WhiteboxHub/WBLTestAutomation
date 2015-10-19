@@ -1,24 +1,17 @@
 package com.wbl.tests.Mobile;
 
-import com.wbl.base.BaseTest;
+import com.wbl.base.MobBaseTest;
 import io.appium.java_client.AppiumDriver;
 import org.testng.annotations.Test;
 import com.wbl.pages.Mobile.HomePage;
 import com.wbl.pages.Mobile.RegistrationPage;
 
-public class RegistrationPageTest extends BaseTest {
+public class RegistrationPageTest extends MobBaseTest {
 
-	AppiumDriver appiumDriver;
 
-	public void setAppiumDriver(AppiumDriver appiumDriver){
-		this.appiumDriver=appiumDriver;
-	}
-
-	
 	@Test(dataProviderClass=MyDataProvider.class , dataProvider="Fillform")
-	public void test2(String UserName,String Email,String Password,String Name, String ProgramLanguage)
-	{
-		
+	public void test2(String UserName,String Email,String Password,String Name, String ProgramLanguage) throws InterruptedException {
+
 		System.out.println("Inside Test");
 		HomePage appHomePage=new HomePage(appiumDriver);
 		appHomePage.clickOnRegistrationButton();
@@ -29,9 +22,7 @@ public class RegistrationPageTest extends BaseTest {
 		formPage.enterName(Name);
 		formPage.selectProgramLanguage(ProgramLanguage);
 		formPage.clickOnRegister();
-		
-		
+
+
 	}
-	
-	
 }

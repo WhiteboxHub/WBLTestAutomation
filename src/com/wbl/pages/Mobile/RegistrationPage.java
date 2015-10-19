@@ -11,12 +11,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegistrationPage {
 
 	private AppiumDriver appiumDriver;
-	
-	
+
+
 	public static final By USERNAMETEXTFIELD=By.id("io.selendroid.testapp:id/inputUsername");
 	public static final By EMAILTEXTFIELD=By.id("io.selendroid.testapp:id/inputEmail");
 	public static final By PASSWORDTEXTFIELD=By.id("io.selendroid.testapp:id/inputPassword");
@@ -25,20 +26,19 @@ public class RegistrationPage {
 	public static final By CHECKBOX=By.id("io.selendroid.testapp:id/input_adds");
 	public static final By REGISTERUSERBT=By.id("io.selendroid.testapp:id/btnRegisterUser");
 	public static final By SPINNERLIST=By.xpath("//*[@id='android:id/select_dialog_listview']/CheckedTextView");
-	
+
 	public RegistrationPage(AppiumDriver appiumDriver)
 	{
 		this.appiumDriver=appiumDriver;
 	}
-	
-	public void enterUserName(String username)
-	{
+
+	public void enterUserName(String username) throws InterruptedException {
 		AndroidElement userElement=(AndroidElement)appiumDriver.findElement(USERNAMETEXTFIELD);
 		userElement.sendKeys(username);
-		((AndroidDriver)appiumDriver).hideKeyboard();
+		Thread.sleep(2000);
+		((AndroidDriver) appiumDriver).hideKeyboard();
 	}
-	public void enterEmail(String email)
-	{
+	public void enterEmail(String email) throws InterruptedException {
 		appiumDriver.findElement(EMAILTEXTFIELD).sendKeys(email);
 		((AndroidDriver)appiumDriver).hideKeyboard();
 	}
@@ -52,7 +52,8 @@ public class RegistrationPage {
 		AndroidElement nameElement=(AndroidElement)appiumDriver.findElement(NAMETEXTFIELD);
 		nameElement.click();
 		nameElement.clear();
-		WaitClass.waitFor(appiumDriver,By.className("android.widget.CheckedTextView"),60);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		//WaitClass.waitFor(appiumDriver,By.className("android.widget.CheckedTextView"),60);
 		nameElement.sendKeys(name);
 		((AndroidDriver)appiumDriver).hideKeyboard();
 	}
@@ -69,13 +70,13 @@ public class RegistrationPage {
 				appiumDriver.tap(1,item,1);
 				break;
 			}
-				
+
 		}
 	}
-	
+
 	public void clickOnRegister()
 	{
 		appiumDriver.findElement(REGISTERUSERBT).click();
 	}
-	
+
 }

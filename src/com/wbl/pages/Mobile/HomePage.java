@@ -9,12 +9,12 @@ import io.appium.java_client.AppiumDriver;
 public class HomePage {
 
 	public static final By REGISTRATIONBUTTON=By.id("io.selendroid.testapp:id/startUserRegistration");
-	
+
 	public static final By CHROMEBUTTON=By.id("io.selendroid.testapp:id/buttonStartWebview");
-	
+
 	private AppiumDriver appiumDriver;
-	
-	
+
+
 	public HomePage(AppiumDriver appiumDriver)
 	{
 		this.appiumDriver=appiumDriver;
@@ -23,13 +23,13 @@ public class HomePage {
 	{
 		WaitClass.waitFor(appiumDriver, REGISTRATIONBUTTON, 60);
 		appiumDriver.findElement(REGISTRATIONBUTTON).click();
-		
+
 	}
 	public void clickOnChromeButton()
 	{
 		WaitClass.waitFor(appiumDriver, CHROMEBUTTON, 60);
 		appiumDriver.findElement(CHROMEBUTTON).click();
-		
+
 	}
-	
+
 }
