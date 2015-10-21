@@ -26,7 +26,7 @@ public class HomePageTest extends BaseWebTest {
     public void testSlidesCount() throws IOException{
     if(driver.getBrowser() != Browsers.HtmlUnit)
      driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
-    assertEquals(6, _hp.getSliderItemsCount());
+    assertEquals(8, _hp.getSliderItemsCount());
     if(driver.getBrowser() != Browsers.HtmlUnit)
      driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
 }
