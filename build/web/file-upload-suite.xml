@@ -1,0 +1,7 @@
+<suite name="FileUploadSuite" verbose="1">
+   <test name="FileUpload">
+        <classes>
+            <class name="com.wbl.tests.ui.FileUploadTest"/>
+        </classes>
+    </test>
+</suite>
