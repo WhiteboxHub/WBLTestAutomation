@@ -22,5 +22,6 @@
   "presentation.dialog.download":"div.drive-viewer-content-download-button-text",
   "recordings.text":"Recordings",
   "recordings.batch.id":"batch",
-  "recordings.recording.id":"classRecording"
+  "recordings.recording.id":"classRecording",
+  "fileupload.name":".centerbtn.btn.btn_fileopen"
 }
