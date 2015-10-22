@@ -28,11 +28,9 @@ public class PresentationPage extends PortalPage {
                 HtmlElement resourceElement = driver.findElement("home:resource");
                 resourceElement.mouseOver(action);
                 //resourceElement.performClickAndHold(action);
-                if(driver.getBrowser() != Browsers.HtmlUnit)
-                 driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+                 driver.takeScreenShot();
                 clickOnPresentation();
-                if(driver.getBrowser() != Browsers.HtmlUnit)
-                driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+                driver.takeScreenShot();
                 openPresentation(pptName, pptPwd);
             }
         }
@@ -66,21 +64,19 @@ public class PresentationPage extends PortalPage {
             if(ppt.getText().equalsIgnoreCase(pptName))
             {
                 ppt.click();
-                driver.getwWindowHandles().windowHandles();
+                driver.getwWindowHandles(false);
                 driver.waitForLoad();
                 //driver.visibilityWait(WBy.get("class=presentation.dialog"));
                 HtmlElement pwdDialog = driver.findElement("presentation.dialog.input");
                 System.out.println(pwdDialog);
                 if(pwdDialog != null && pwdDialog.isDisplayed())
                 {
-                    driver.getwWindowHandles().switchToWindow();
-                    if(driver.getBrowser() != Browsers.HtmlUnit)
-                    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+                    driver.getwWindowHandles(true);
+                    driver.takeScreenShot();
                     driver.findElement("presentation.dialog.input").sendKeys(pptPwd);
                     driver.findElement("presentation.dialog.submit").click();
                     HtmlElement downloadLink = driver.findElement("presentation.dialog.download");
-                    if(driver.getBrowser() != Browsers.HtmlUnit)
-                    driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
+                    driver.takeScreenShot();
                     if(downloadLink != null && driver.findElement("presentation.dialog.download").isDisplayed())
                     {
                         driver.findElement("presentation.dialog.download").click();

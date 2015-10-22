@@ -43,11 +43,9 @@ public class LoginPageTest extends BaseWebTest {
     {
         _lp.getLoginPage();
         boolean actual = _lp.perfromLogin(uname, pwd);
-        if(driver.getBrowser() != Browsers.HtmlUnit)
-        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+        driver.takeScreenShot();
         assertTrue(actual);
-        if(driver.getBrowser() != Browsers.HtmlUnit)
-        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+        driver.takeScreenShot();
     }
 
     @Test(dependsOnMethods = {"testLogin"})
@@ -55,11 +53,9 @@ public class LoginPageTest extends BaseWebTest {
     {
         String preSessionId = _lp.getCookie(cookieName);
         String postSessionId = _lp.performLogout(cookieName);
-        if(driver.getBrowser() != Browsers.HtmlUnit)
-        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot, driver._configuration.ScreenFolderPath);
+        driver.takeScreenShot();
         assertNotEquals(preSessionId, postSessionId);
-        if(driver.getBrowser() != Browsers.HtmlUnit)
-        driver.getwScreenshot().takeScreenShot(driver._configuration.TakeScreenShot,driver._configuration.ScreenFolderPath);
+        driver.takeScreenShot();
     }
 
 }

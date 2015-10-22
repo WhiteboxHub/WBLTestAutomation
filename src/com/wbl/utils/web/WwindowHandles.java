@@ -9,27 +9,20 @@ import java.util.Iterator;
  */
 public class WwindowHandles {
 
-    WebDriver _webDriver;
-
-    public WwindowHandles(WebDriver driver)
+    public void switchToWindow(WebDriver driver)
     {
-        this._webDriver = driver;
-    }
-
-    public void switchToWindow()
-    {
-        String newWindow = _webDriver.getWindowHandle();
-        _webDriver.switchTo().window(newWindow);
+        String newWindow = driver.getWindowHandle();
+        driver.switchTo().window(newWindow);
     }
 
 
 
-    public void windowHandles()
+    public void windowHandles(WebDriver driver)
     {
-        Iterator<String> handles = _webDriver.getWindowHandles().iterator();
+        Iterator<String> handles = driver.getWindowHandles().iterator();
         while(handles.hasNext()){
             String child = handles.next();
-            _webDriver.switchTo().window(child);
+            driver.switchTo().window(child);
         }
     }
 

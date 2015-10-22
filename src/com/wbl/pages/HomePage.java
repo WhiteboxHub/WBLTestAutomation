@@ -29,10 +29,7 @@ public class HomePage extends PortalPage {
         try{
 	        driver.visibilityWait(WBy.get("header.social.fblink"));
             if(driver.getBrowser() != Browsers.HtmlUnit) {
-                WebDriver wd = driver.getWebDriver();
-                WebElement element = wd.findElement(WBy.get("header.social.fblink"));
-                WJavascriptExecutor js = new WJavascriptExecutor(wd, element);
-                js.executeScript("arguments[0].click();");
+                driver.executeJavaScript("arguments[0].click();","header.social.fblink");
             }
             else
             {

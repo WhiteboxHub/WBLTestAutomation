@@ -34,8 +34,7 @@ public class PageDriver implements ElementsContainer {
     private String _mainWindowHandler;
     private Logger _logger;
     private WScreenshot wScreenshot;
-
-    private WwindowHandles wWindowHandles;
+    private WwindowHandles wWindowHandles = new WwindowHandles();
 
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
@@ -149,10 +148,26 @@ public class PageDriver implements ElementsContainer {
     	return _webDriver;
     }
     
-    public Object ExecuteJavaScript(String javaScript, Object[] args) {
+    public Object executeJavaScript(String javaScript, String locator) {
         JavascriptExecutor javaScriptExecutor = (JavascriptExecutor) _webDriver;
+        try {
+            return javaScriptExecutor.executeScript(javaScript, _webDriver.findElement(WBy.get(locator)));
+        } catch (Exception e) {
+            _logger.error(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        return javaScriptExecutor.executeScript(javaScript, args);
+    public Object executeAsyncJavaScript(String javaScript, String locator) {
+        JavascriptExecutor javaScriptExecutor = (JavascriptExecutor) _webDriver;
+        try {
+            return javaScriptExecutor.executeAsyncScript(javaScript, _webDriver.findElement(WBy.get(locator)));
+        } catch (Exception e) {
+            _logger.error(e);
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getDescription() {
@@ -311,19 +326,23 @@ public class PageDriver implements ElementsContainer {
         return new HtmlUnitDriver();
     }
 
-    public WScreenshot getwScreenshot() {
-        if(_browser != Browsers.HtmlUnit)
-          wScreenshot = new WScreenshot((TakesScreenshot)_webDriver);
-        return wScreenshot;
+    public void takeScreenShot()throws IOException
+    {
+        if(_browser != Browsers.HtmlUnit) {
+            wScreenshot = new WScreenshot((TakesScreenshot) _webDriver);
+            wScreenshot.takeScreenShot(_configuration.TakeScreenShot,_configuration.ScreenFolderPath);
+        }
     }
 
-//    public void setwScreenshot(WScreenshot wScreenshot) {
-//        this.wScreenshot = wScreenshot;
-//    }
+    public void getwWindowHandles(boolean isSingleWindow) {
 
-    public WwindowHandles getwWindowHandles() {
-        if(_webDriver != null)
-            wWindowHandles = new WwindowHandles(_webDriver);
-        return wWindowHandles;
+        if(isSingleWindow)
+        {
+            wWindowHandles.switchToWindow(_webDriver);
+        }
+        else
+        {
+            wWindowHandles.windowHandles(_webDriver);
+        }
     }
 }
