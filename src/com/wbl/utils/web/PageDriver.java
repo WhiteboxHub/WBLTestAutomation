@@ -35,6 +35,7 @@ public class PageDriver implements ElementsContainer {
     private Logger _logger;
     private WScreenshot wScreenshot;
     private WwindowHandles wWindowHandles = new WwindowHandles();
+    private FileUpload fileUpload =  new FileUpload();
 
     public PageDriver(Configuration configuration) {
         _configuration = configuration;
@@ -344,5 +345,15 @@ public class PageDriver implements ElementsContainer {
         {
             wWindowHandles.windowHandles(_webDriver);
         }
+    }
+
+    public void uploadFile() {
+        if(fileUpload != null)
+            try {
+                fileUpload.uploadFile(fileUpload.getFilePath());
+            } catch (IOException e) {
+                _logger.error(e);
+                e.printStackTrace();
+            }
     }
 }

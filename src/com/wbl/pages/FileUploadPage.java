@@ -11,7 +11,6 @@ import java.io.FileReader;
  */
 public class FileUploadPage extends PortalPage{
 
-    FileUpload fileUpload;
     public FileUploadPage(PageDriver driver) {
          super(driver);
     }
@@ -22,7 +21,7 @@ public class FileUploadPage extends PortalPage{
         try{
          driver.open("http://www.fotor.com/");
          driver.findElement("fileupload.name").click();
-         getFileUpload().uploadFile(getFileUpload().getFilePath());
+         driver.uploadFile();
         }
         catch(Exception ex)
         {
@@ -34,7 +33,4 @@ public class FileUploadPage extends PortalPage{
         return status;
     }
 
-    public FileUpload getFileUpload() {
-        return new FileUpload();
-    }
 }
