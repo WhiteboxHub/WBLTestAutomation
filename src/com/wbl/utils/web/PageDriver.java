@@ -34,6 +34,7 @@ public class PageDriver implements ElementsContainer {
     private String _mainWindowHandler;
     private Logger _logger;
     private WScreenshot wScreenshot;
+    private WSelect wSelect;
     private WwindowHandles wWindowHandles = new WwindowHandles();
     private FileUpload fileUpload =  new FileUpload();
 
@@ -355,5 +356,18 @@ public class PageDriver implements ElementsContainer {
                 _logger.error(e);
                 e.printStackTrace();
             }
+    }
+
+    public WSelect getwSelect(String locator)
+    {
+        try {
+            wSelect = new WSelect(_webDriver.findElement(WBy.get(locator)));
+            return wSelect;
+        } catch (Exception e) {
+            _logger.error(e);
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -60,9 +60,9 @@ public class RecordingsPage extends PortalPage {
 
     public void openRecording(String batch,String topic)throws Exception
     {
-        WSelect batchSelect = new WSelect("id=recordings.batch.id");
+        WSelect batchSelect = driver.getwSelect("id=recordings.batch.id");
         batchSelect.byVisibleText(batch);
-        WSelect recordingSelect = new WSelect("id=recordings.recording.id");
+        WSelect recordingSelect =  driver.getwSelect("id=recordings.recording.id");
         recordingSelect.byVisibleText(topic);
 
     }

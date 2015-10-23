@@ -10,21 +10,16 @@ import java.util.List;
  * Created by Alok on 10/7/2015.
  */
 public class WSelect {
-    private PageDriver _browser ;
-    private WebElement _element ;
     private Logger _logger;
     private Select se;
 
-    public WSelect(PageDriver browser, WebElement element) {
-        _element = element;
-        _browser = browser;
+    public WSelect() {
         _logger = Logger.getLogger(WSelect.class);
     }
-    public WSelect(String locator) {
+    public WSelect(WebElement element) {
 
         try {
-            WebElement e=_element.findElement(WBy.get(locator));
-            se = new Select(e);
+            se = new Select(element);
         }
         catch (Exception e) {
             _logger.error(e);
