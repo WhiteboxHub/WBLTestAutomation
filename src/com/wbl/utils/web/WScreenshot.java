@@ -23,11 +23,12 @@ public class WScreenshot {
         this.takesScreenshot = takesScreenshot;
     }
 
-    public void takeScreenShot(boolean isTakeScreens,String parentPath)throws IOException
+    public void takeScreenShot(boolean isTakeScreens)throws IOException
     {
         if(isTakeScreens)
         {
             String date = getFormattedDate();
+            String parentPath =  new File(String.format("%s/screenshots", System.getProperty("user.dir"))).getAbsolutePath();
             String newDir = parentPath+"/"+date;
             File file = new File(newDir);
             if(!file.exists()) {

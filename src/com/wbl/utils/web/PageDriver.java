@@ -332,7 +332,7 @@ public class PageDriver implements ElementsContainer {
     {
         if(_browser != Browsers.HtmlUnit) {
             wScreenshot = new WScreenshot((TakesScreenshot) _webDriver);
-            wScreenshot.takeScreenShot(_configuration.TakeScreenShot,_configuration.ScreenFolderPath);
+            wScreenshot.takeScreenShot(_configuration.TakeScreenShot);
         }
     }
 
@@ -369,5 +369,10 @@ public class PageDriver implements ElementsContainer {
         }
 
         return null;
+    }
+
+    public String getPageSource()
+    {
+        return _webDriver.getPageSource();
     }
 }

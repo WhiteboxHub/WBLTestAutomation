@@ -23,9 +23,10 @@ public class ExcelUtils {
         _logger = Logger.getLogger(ExcelUtils.class);
     }
 
-    public Object[][] getSimpleExcelData(String filePath,String sheetName)
+    public Object[][] getSimpleExcelData(String fileName,String sheetName)
             throws Exception {
-        XSSFWorkbook workbook = getWorkBook(filePath);
+        fileName = new File(String.format("%s/resources", System.getProperty("user.dir"))).getAbsolutePath()+"\\"+fileName;
+        XSSFWorkbook workbook = getWorkBook(fileName);
         Sheet sheet = workbook.getSheet(sheetName);//workbook.getSheetAt(workbook.getActiveSheetIndex());
         int numberOfRows = sheet.getLastRowNum() + 1;
         int numberOfColumns = countNonEmptyColumns(sheet);
@@ -50,9 +51,10 @@ public class ExcelUtils {
         return data;
     }
 
-    public Object[][] getComplexExcelData(String filePath)
+    public Object[][] getComplexExcelData(String fileName)
             throws Exception {
-        XSSFWorkbook workbook = getWorkBook(filePath);
+        fileName = new File(String.format("%s/resources", System.getProperty("user.dir"))).getAbsolutePath()+"\\"+fileName;
+        XSSFWorkbook workbook = getWorkBook(fileName);
         Sheet sheet = workbook.getSheetAt(workbook.getActiveSheetIndex());
         int numberOfRows = sheet.getLastRowNum() + 1;
         int numberOfColumns = countNonEmptyColumns(sheet);
