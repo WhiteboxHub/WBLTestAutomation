@@ -26,7 +26,7 @@ public class GitHubTest extends BaseApiTest {
 
     @DataProvider(name = "users-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getComplexExcelData(restUtil._configuration.DataFilePath);
+        Object[][] data = excelUtils.getComplexExcelData(restUtil._configuration.DataFileName);
         return data;
     }
 

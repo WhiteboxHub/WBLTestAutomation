@@ -24,7 +24,7 @@ public class RecordingsPageTest extends BaseWebTest {
 
     @DataProvider(name = "recording-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFilePath,sheetName);
+        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFileName,sheetName);
         return data;
     }
 

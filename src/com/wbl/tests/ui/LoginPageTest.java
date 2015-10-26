@@ -34,7 +34,7 @@ public class LoginPageTest extends BaseWebTest {
 
     @DataProvider(name = "users-data")
     public Object[][] getUsers() throws Exception {
-        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFilePath,sheetName);
+        Object[][] data = excelUtils.getSimpleExcelData(driver._configuration.DataFileName,sheetName);
         return data;
     }
 
