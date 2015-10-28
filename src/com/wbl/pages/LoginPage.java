@@ -41,6 +41,7 @@ public class LoginPage extends PortalPage {
             userId.sendKeys(userName);
             pwd.sendKeys(password);
             driver.findElement("login.loginBtn").click();
+            driver.waitForLoad();
             driver.elementClickWait(WBy.get("id=home.logoutLink"));
             isVisible = driver.findElement("id=home.logoutLink").isDisplayed();
         }

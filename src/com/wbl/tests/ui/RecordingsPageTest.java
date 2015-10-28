@@ -33,7 +33,7 @@ public class RecordingsPageTest extends BaseWebTest {
     {
         boolean actual = _rp.playRecordings(uname, pwd, batch, recording);
         assertTrue(actual);
-      //  driver.takeScreenShot();
+        driver.takeScreenShot();
     }
 
     @AfterTest

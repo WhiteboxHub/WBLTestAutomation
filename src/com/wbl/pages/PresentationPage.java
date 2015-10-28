@@ -22,6 +22,7 @@ public class PresentationPage extends PortalPage {
         boolean status = false;
         try {
             _lp.getLoginPage();
+            driver.waitForLoad();
             status = _lp.perfromLogin(userName, pwd);
             if (status) {
                 Actions action = driver.initializeAction();
@@ -49,7 +50,7 @@ public class PresentationPage extends PortalPage {
         {
             if(element.getAttribute("href").contains("presentations"))
             {
-                driver.visibilityWait(WBy.get("link=presentation.text"));
+               // driver.visibilityWait(WBy.get("link=presentation.text"));
                 element.click();
                 break;
             }

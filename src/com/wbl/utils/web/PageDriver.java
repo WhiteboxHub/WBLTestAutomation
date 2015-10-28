@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.os.WindowsUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -179,35 +180,52 @@ public class PageDriver implements ElementsContainer {
     public String getCookie(String cookieName)
     {
         String value = null;
-        return _webDriver.manage().getCookieNamed(cookieName).getValue();
+        if(_browser == Browsers.InternetExplorer) {
+            value = (String) ((JavascriptExecutor) _webDriver).executeScript("return document.cookie;");
+            if(value.contains("="))
+            {
+                value = value.split("=")[1];
+            }
+        }
+        else
+        {
+            value = _webDriver.manage().getCookieNamed(cookieName).getValue();
+        }
+        return value;
     }
 
     public void implicitWait(long timeout)throws Exception
     {
-        if (_browser != Browsers.HtmlUnit) {
+       // if (_browser != Browsers.HtmlUnit) {
         _webDriver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+          Thread.sleep(timeout);
             return;
-        }
-        Thread.sleep(timeout);
+      //  }
+
     }
 
 
     public void elementClickWait(By locator )
     {
-        if (_browser != Browsers.HtmlUnit) {
+      // if (_browser != Browsers.HtmlUnit) {
             long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
             WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
             wait.until(ExpectedConditions.elementToBeClickable(locator));
-        }
+      //s  }
     }
 
     public void visibilityWait(By locator)
     {
-        if (_browser != Browsers.HtmlUnit) {
+        //if (_browser != Browsers.HtmlUnit) {
+        try {
             long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
             WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        // }
     }
     public void waitForLoad()
     {
@@ -221,9 +239,20 @@ public class PageDriver implements ElementsContainer {
             long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
             WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
             wait.until(pageLoadCondition);
-        }
+       }
     }
 
+    public void presenceWait(By locator)
+    {
+        try {
+        long timeout = Long.valueOf(_configuration.WaitTimeout).longValue();
+        WebDriverWait wait = new WebDriverWait(_webDriver, timeout);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     public Actions initializeAction()
     {
         return new Actions(_webDriver);
@@ -262,6 +291,7 @@ public class PageDriver implements ElementsContainer {
 
     private InternetExplorerDriver startInternetExplorer() {
         System.setProperty("webdriver.ie.driver", String.format("%s/IEDriverServer.exe", System.getProperty("user.dir")));
+        //WindowsUtils.writeStringRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BFCACHE", "2.48.2");
         DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
         caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         caps.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, false);
@@ -325,7 +355,7 @@ public class PageDriver implements ElementsContainer {
     }
 
     private HtmlUnitDriver startHtmlUnit() {
-        return new HtmlUnitDriver();
+        return new HtmlUnitDriver(true);
     }
 
     public void takeScreenShot()throws IOException

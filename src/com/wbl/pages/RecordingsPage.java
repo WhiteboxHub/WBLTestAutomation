@@ -30,9 +30,9 @@ public class RecordingsPage extends PortalPage {
                 Actions action = driver.initializeAction();
                 HtmlElement resourceElement = driver.findElement("home:resource");
                 resourceElement.performClickAndHold(action);
-         //       driver.takeScreenShot();
+                driver.takeScreenShot();
                 clickOnRecordings();
-           //     driver.takeScreenShot();
+                driver.takeScreenShot();
                 openRecording(batch, topic);
             }
         }
@@ -51,7 +51,7 @@ public class RecordingsPage extends PortalPage {
         {
             if(element.getAttribute("href").contains("recordings"))
             {
-                driver.visibilityWait(WBy.get("link=recordings.text"));
+               // driver.visibilityWait(WBy.get("link=recordings.text"));
                 element.click();
                 break;
             }

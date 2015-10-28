@@ -14,7 +14,13 @@ public class HomePage extends PortalPage {
     public HomePage(PageDriver driver) {
         super(driver);
         _logger.debug("Open Home Page");
-        driver.findElement("header.home").click();
+        try {
+            driver.findElement("header.home").click();
+        }
+        catch(Exception e)
+        {
+            _logger.error(e);
+        }
     }
 
     public int getSliderItemsCount() {
@@ -35,7 +41,7 @@ public class HomePage extends PortalPage {
             {
                 driver.findElement("header.social.fblink").click();
             }
-
+            driver.waitForLoad();
             status = driver.getCurrentUrl().contains("facebook")?true:false;
         }
         catch(Exception e)

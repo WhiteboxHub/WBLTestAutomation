@@ -25,7 +25,7 @@ public class HomePageTest extends BaseWebTest {
     @Test(priority = 1, alwaysRun = true)
     public void testSlidesCount() throws IOException{
         driver.takeScreenShot();
-    assertEquals(8, _hp.getSliderItemsCount());
+        assertEquals(8, _hp.getSliderItemsCount());
         driver.takeScreenShot();
 }
 
