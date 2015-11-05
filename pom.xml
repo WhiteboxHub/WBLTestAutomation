@@ -66,6 +66,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.48.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.12</version>
@@ -86,7 +91,11 @@
             <artifactId>selenium-htmlunit-driver</artifactId>
             <version>2.48.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.1</version>
+        </dependency>
     </dependencies>
 
 </project>
