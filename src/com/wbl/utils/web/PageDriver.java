@@ -1,5 +1,6 @@
 package com.wbl.utils.web;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.wbl.utils.Configuration;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -326,7 +328,9 @@ public class PageDriver implements ElementsContainer {
                 "services.sync.prefs.sync.browser.download.manager.showWhenStarting",
                 false);
         firefoxProfile.setPreference("pdfjs.disabled", true);*/
-        return new FirefoxDriver();
+        FirefoxBinary fb = new FirefoxBinary();
+        fb.setEnvironmentProperty("DISPLAY", ":2");
+        return new FirefoxDriver(fb,null);
     }
 
     private ChromeDriver startChrome() {
