@@ -329,7 +329,7 @@ public class PageDriver implements ElementsContainer {
                 false);
         firefoxProfile.setPreference("pdfjs.disabled", true);*/
         FirefoxBinary fb = new FirefoxBinary();
-        fb.setEnvironmentProperty("DISPLAY", ":99");
+        fb.setEnvironmentProperty("DISPLAY", ":2");
         return new FirefoxDriver(fb,null);
     }
 
