@@ -1,4 +1,4 @@
-package com.wbl.base;
+package com.wbl.base.mobile;
 
 import com.wbl.utils.Configuration;
 import org.apache.log4j.Logger;
@@ -11,7 +11,7 @@ public abstract class BaseTest {
     public static final Configuration _config;
 
     static {
-        _config = new Configuration("web");
+        _config = new Configuration("mob");
     }
 
     //Rally connection

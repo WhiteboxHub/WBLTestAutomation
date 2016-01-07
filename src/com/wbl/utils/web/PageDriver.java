@@ -2,6 +2,9 @@ package com.wbl.utils.web;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.wbl.utils.Configuration;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.remote.MobilePlatform;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -20,7 +23,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -275,6 +282,9 @@ public class PageDriver implements ElementsContainer {
                 case HtmlUnit:
                     _webDriver = startHtmlUnit();
                     break;
+                case Android:
+                    _webDriver = startAndroidDriver();
+                    break;
                 default:
                     _webDriver = startHtmlUnit();
                     break;
@@ -362,6 +372,28 @@ public class PageDriver implements ElementsContainer {
         return new HtmlUnitDriver(true);
     }
 
+    private AndroidDriver startAndroidDriver()
+    {
+        AndroidDriver d = null;
+        DesiredCapabilities options=new DesiredCapabilities();
+        //options.setPlatform(Platform.ANDROID);
+        options.setCapability(MobileCapabilityType.PLATFORM_VERSION,"4.4");
+        options.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+        options.setCapability(MobileCapabilityType.DEVICE_NAME,_configuration.Devicename);
+        options.setCapability("appPackage", "io.selendroid.testapp");
+        options.setCapability("appActivity", "io.selendroid.testapp.HomeScreenActivity");
+
+        try {
+            d =  new AndroidDriver(new URL(_configuration.AppiumURL), options);
+            installApp(d);
+
+        } catch (MalformedURLException e) {
+            _logger.error(e);
+        }
+
+        return d;
+    }
+
     public void takeScreenShot()throws IOException
     {
         if(_browser != Browsers.HtmlUnit) {
@@ -408,5 +440,17 @@ public class PageDriver implements ElementsContainer {
     public String getPageSource()
     {
         return _webDriver.getPageSource();
+    }
+
+    public void installApp(AndroidDriver driver)
+    {
+        try {
+            driver.installApp(new File(String.format("%s/"+_configuration.APKName, System.getProperty("user.dir"))).getAbsolutePath());
+            driver.startActivity("io.selendroid.testapp", ".HomeScreenActivity");
+        }
+        catch(Exception e)
+        {
+            _logger.error(e);
+        }
     }
 }

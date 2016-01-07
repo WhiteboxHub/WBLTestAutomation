@@ -24,23 +24,29 @@ public class Configuration {
     private Logger _logger;
     public String DataFileName;
     public boolean TakeScreenShot;
-   // public String ScreenFolderPath;
-    //public ArrayList<String> SheetNameList = new ArrayList<String>();
+    public String MobileOs;
+    public String Devicename;
+    public String APKName;
+    public String AppiumURL;
 
 
-    public Configuration(boolean isWebTest) {
+    public Configuration(String type){//boolean isWebTest) {
         try {
             _logger = Logger.getLogger(Configuration.class);
 
-            Properties props = loadProperties(isWebTest);
+            Properties props = loadProperties(type);
             setCommonProps(props);
-            if(isWebTest)
+            if(type=="web")
             {
                 setWebProps(props);
             }
-            else
+            else if(type=="rest")
             {
                 setRestProps(props);
+            }
+            else
+            {
+                setMobProps(props);
             }
 
         } catch (Exception ex) {
@@ -49,16 +55,22 @@ public class Configuration {
 
     }
 
-    private Properties loadProperties(boolean isWebTest)
+    private Properties loadProperties(String type)//boolean isWebTest)
     {
         Properties props = new Properties();
         try {
-        if(isWebTest) {
-            props.load(new FileReader(String.format("%s/config.properties", System.getProperty("user.dir"))));
-        }
-        else{
-            props.load(new FileReader(String.format("%s/restConfig.properties", System.getProperty("user.dir"))));
-        }
+            if(type=="web")
+            {
+                props.load(new FileReader(String.format("%s/config.properties", System.getProperty("user.dir"))));
+            }
+            else if(type=="rest")
+            {
+                props.load(new FileReader(String.format("%s/restConfig.properties", System.getProperty("user.dir"))));
+            }
+            else
+            {
+                props.load(new FileReader(String.format("%s/mobileConfig.properties", System.getProperty("user.dir"))));
+            }
         } catch (IOException e) {
             _logger.error(e);
         }
@@ -104,38 +116,14 @@ public class Configuration {
     public void setRestProps(Properties mProps)
     {
         BaseURI = mProps.getProperty("uri");
-        //setSheetNames(mProps);
-       // setJsonProps(mProps);
     }
 
-    /*public void setJsonProps(Properties mProps)
+    public void setMobProps(Properties mProps)
     {
-        String jsonKeys = mProps.getProperty("json-keys");
-        String jsonValues = mProps.getProperty("json-values");
-        String[] jsonKeysArr = jsonKeys.split(",");
-        String[] jsonValuesArr = jsonValues.split(",");
-        int count = 0;
-        for (String key : jsonKeysArr)
-        {
-            JsonMap.put(key,jsonValuesArr[count]);
-            count++;
-        }
-    }*/
-
-    /*public void setSheetNames(Properties mProps)
-    {
-        String sheetName = mProps.getProperty("sheet-name");
-        if(sheetName.contains(","))
-        {
-            String[] names = sheetName.split(",");
-            for(int i=0;i<names.length;i++)
-            {
-                SheetNameList.add(names[i]);
-            }
-        }
-        else
-        {
-            SheetNameList.add(sheetName);
-        }
-    }*/
+        MobileOs =mProps.getProperty("os");
+        Devicename = mProps.getProperty("deviceName");
+        APKName = mProps.getProperty("apkName");
+        AppiumURL = mProps.getProperty("appiumURL");
+        Browser = Browsers.Android;
+    }
 }

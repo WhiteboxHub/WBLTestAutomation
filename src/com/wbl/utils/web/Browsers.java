@@ -7,5 +7,6 @@ public enum Browsers {
     InternetExplorer,
     Firefox,
     Chrome,
-    HtmlUnit
+    HtmlUnit,
+    Android
 }
