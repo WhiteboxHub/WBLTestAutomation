@@ -11,7 +11,7 @@ public abstract class BaseRestTest {
     public static final Configuration _config;
 
     static {
-        _config = new Configuration(false);
+        _config = new Configuration("rest");
     }
 
     //Rally connection
