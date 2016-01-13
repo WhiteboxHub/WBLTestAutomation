@@ -19,9 +19,9 @@ public class HomePageTest extends MobBaseTest {
 	}
 
 	@Test
-	public void test() throws InterruptedException
+	public void test()
 	{
-		System.out.println("Inside Test");
+		/*System.out.println("Inside Test");
 		HtmlElement inputField = driver.findElement("android.widget.EditText");
 		inputField.click();
 		Assert.assertEquals("true", inputField.getAttribute("enabled"));
@@ -30,10 +30,11 @@ public class HomePageTest extends MobBaseTest {
 		//Thread.sleep(4000);
 		driver.findElement("mob.enbthn").click();
 		Thread.sleep(2000);
-		driver.findElement("mob.nonobtn").click();
+		driver.findElement("mob.nonobtn").click();*/
 
 	} 
 	
 	}
+
 
 

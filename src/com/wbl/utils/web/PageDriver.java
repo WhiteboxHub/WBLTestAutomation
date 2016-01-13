@@ -1,12 +1,9 @@
 package com.wbl.utils.web;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.wbl.utils.Configuration;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,20 +13,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.os.WindowsUtils;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -374,24 +367,25 @@ public class PageDriver implements ElementsContainer {
 
     private AndroidDriver startAndroidDriver()
     {
-        AndroidDriver d = null;
-        DesiredCapabilities options=new DesiredCapabilities();
-        //options.setPlatform(Platform.ANDROID);
-        options.setCapability(MobileCapabilityType.PLATFORM_VERSION,"4.4");
-        options.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-        options.setCapability(MobileCapabilityType.DEVICE_NAME,_configuration.Devicename);
-        options.setCapability("appPackage", "io.selendroid.testapp");
-        options.setCapability("appActivity", "io.selendroid.testapp.HomeScreenActivity");
-
+        AndroidDriver driver = null;
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
+        capabilities.setCapability("deviceName", _configuration.Devicename);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"4.4.2" );
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,_configuration.Devicename);
+        capabilities.setCapability(MobileCapabilityType.APP,new File(String.format("%s/"+_configuration.APKName, System.getProperty("user.dir"))).getAbsolutePath());
+        capabilities.setCapability("appPackage",_configuration.AppPackage);
+        capabilities.setCapability("appActivity",_configuration.AppActivity);
         try {
-            d =  new AndroidDriver(new URL(_configuration.AppiumURL), options);
-            installApp(d);
-
-        } catch (MalformedURLException e) {
+            driver =  new AndroidDriver(new URL(_configuration.AppiumURL), capabilities);
+            driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+            Thread.sleep(10000);
+        } catch (Exception e) {
             _logger.error(e);
         }
 
-        return d;
+        return driver;
     }
 
     public void takeScreenShot()throws IOException

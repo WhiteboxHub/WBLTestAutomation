@@ -21,32 +21,4 @@ public abstract class MobBaseTest extends BaseTest {
 		driver.quit();
 	}
 }
-/*
-	public static final Configuration _config;
-
-	static {
-		_config = new Configuration("mob");
-	}
-
-	public MobBaseTest(PageDriver driver) {
-		super(driver);
-		_logger.debug("MobBaseTest");
-	}
-
-	@BeforeTest
-	public void setUp() throws Exception {
-
-		//driver.get_appiumDriver();
-
-		//driver = UtilityClass.getDeviceDriver(_config.MobileOs, _config.Devicename);
-		driver.winstallApp("D:/supriya/softwares/selendroid-test-app-0.16.0.apk");
-				((AndroidDriver) driver._appiumDriver).startActivity("io.selendroid.testapp", ".HomeScreenActivity");
-	}
-
-	@AfterTest
-	public void After1()
-	{
-		//((AndroidDriver)appiumDriver).removeApp("io.selendroid.testapp");
-		driver.quit();
-	}*/
 

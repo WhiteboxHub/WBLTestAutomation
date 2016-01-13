@@ -28,6 +28,9 @@ public class Configuration {
     public String Devicename;
     public String APKName;
     public String AppiumURL;
+    public String AppPackage;
+    public String AppActivity;
+
 
 
     public Configuration(String type){//boolean isWebTest) {
@@ -125,5 +128,7 @@ public class Configuration {
         APKName = mProps.getProperty("apkName");
         AppiumURL = mProps.getProperty("appiumURL");
         Browser = Browsers.Android;
+        AppActivity = mProps.getProperty("appActivity");
+        AppPackage = mProps.getProperty("appPackage");
     }
 }
