@@ -9,6 +9,7 @@ import com.wbl.pages.PortalPage;
 /**
  * Created by svelupula on 8/14/2015.
  */
+//home page
 public class HomePage extends PortalPage {
 
     public HomePage(PageDriver driver) {
